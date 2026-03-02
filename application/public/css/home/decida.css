@@ -1,0 +1,103 @@
+
+.section-decida {
+    width: 100%;
+    background-color: #dcd8e6;
+    padding: 100px 0;
+    display: flex;
+    align-items: flex-end;
+}
+.logoWhite{
+    width: 100px;
+}
+.container-decida {
+    width: 85%;
+    background-color: #dcd8e6;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+/* ===== TOPO ===== */
+
+.top-decida {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-decida {
+    width: 50%;
+}
+
+.image-decida img {
+    width: 100%;
+}
+
+.content-decida {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.small-title {
+    font-size: 14px;
+    color: #777;
+}
+
+.content-decida h2 {
+    font-size: 68px;
+    font-weight: 400;
+}
+
+.content-decida p {
+    font-size: 20px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.link-orcamento {
+    color: #3700FF;
+    text-decoration: none;
+    font-size: 23px;
+    margin-top: 10px;
+}
+
+
+.bottom-decida {
+    background-color: #cfcad9;
+    padding: 100px 40PX;
+    display: flex;
+    justify-content: space-between;
+}
+
+.step-item {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background-color: #3700FF;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.step-item h3 {
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.step-item p {
+    font-size: 20px;
+    color: #555;
+    line-height: 1.5;
+}
