@@ -28,8 +28,6 @@
     line-height: 1.5;
 }
 
-
-
 .section-como-funciona {
     width: 100%;
     background-color: #f2f2f2;
@@ -97,4 +95,44 @@
     font-size: 20px;
     color: #555;
     line-height: 1.6;
+}
+
+@media screen and (width <= 440px) {
+    .section-numeros {
+        padding: 70px 0px;
+    }
+    .section-como-funciona{
+        padding: 50px 0;
+    }
+    .container-numeros {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+    .numero-item {
+        width: 80%;
+    }
+    .numero-item h3 {
+        font-size: 2.4em;
+    }
+    .container-funciona {
+        flex-direction: column;
+    }
+    .left-funciona {
+        width: 100%;
+    }
+    .left-funciona .small-title{
+        font-size: 1.5em;
+    }
+    .left-funciona h2 {
+        font-size: 2.2em;
+    }
+    .right-funciona {
+        width: 100%;
+        padding: 30px 0;
+    }
+    .right-funciona h3 {
+        font-size: 2.0em;
+    }
 }

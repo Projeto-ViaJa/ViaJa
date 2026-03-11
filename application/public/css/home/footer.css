@@ -60,3 +60,11 @@
     background-color: rgba(255,255,255,0.4);
 }
 
+@media screen and (width <= 440px) {
+    .container-footer {
+        height: 35vh;
+    }
+    .footer-col {
+        align-items: center;
+    }
+}

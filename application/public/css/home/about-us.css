@@ -92,3 +92,42 @@
     color: #555;
     max-width: 250px;
 }
+
+@media screen and (width <= 440px) {
+    .section-dados {
+        padding: 30px 0;
+        width: 100vw;
+    }
+    .section-dados .content-dados  h2{
+        font-size: 1.2em;
+    }
+    .bg-rotated {
+        width: 100px;
+        height: 30vh;
+        transform: rotate(0);
+    }
+    .bg-rotated img {
+        height: 40px;
+    }
+    .content-dados p {
+        font-size: 1em;
+    }
+    .content-dados {
+        gap: 5px;
+    }
+    .top-dados {
+        width: 100%;
+    }
+    .bottom-dados {
+        flex-direction: column;
+        align-items: center;
+    }
+    .bottom-dados img {
+        width: 100px;
+    }
+    .card-dado {
+        width: 90%;
+        gap: 15px;
+        padding-bottom: 10px;
+    }
+}
