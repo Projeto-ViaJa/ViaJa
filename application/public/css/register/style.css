@@ -198,3 +198,36 @@ body {
     font-weight: 500;
     z-index: 1;
 }
+
+@media screen and (width <= 440px) {
+    .image-sub-container{
+        display: none;
+    }
+    .image-container {
+        display: none;
+    }
+    .form-container{
+        width: 100%;
+    }
+    .form-sub-container{
+        width: 74%;
+    }
+    .text-container h2 {
+        font-size: 2.5em;
+    }
+    .text-container p {
+        font-size: 1em;
+    }
+    .input-group label {
+        font-size: 1.2em;
+    }
+    .already-account {
+        font-size: 1.1em;
+    }
+    .remember-container div label {
+        font-size: 1em;
+    }
+    .remember-container div a {
+        font-size: 1em;
+    }
+}

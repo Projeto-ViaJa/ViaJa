@@ -130,4 +130,7 @@
         gap: 15px;
         padding-bottom: 10px;
     }
+    .card-dado p {
+        font-size: 1.1em;
+    }
 }
