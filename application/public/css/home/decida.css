@@ -101,3 +101,46 @@
     color: #555;
     line-height: 1.5;
 }
+
+@media screen and (width <= 440px) {
+    .section-decida{
+        padding: 40px 0;
+    }
+    .top-decida {
+        flex-direction: column;
+    }
+    .image-decida {
+        width: 70vw;
+    }
+    .top-decida .image-decida img{
+        height: 100%;
+        width: 100%;
+    }
+    .top-decida h2 {
+        font-size: 2.2em;
+        width: 100%;
+        text-align: center;
+    }
+    .content-decida{
+        width: 95%;
+    }
+    .content-decida br {
+        display: none;
+    }
+    .content-decida p{
+        font-size: 1.1em;
+    }
+    .bottom-decida {
+        padding: 0px 40px;
+        flex-direction: column;
+    }
+    .step-item{
+        width: 100%;
+        padding-top: 30px;
+        padding-bottom: 15px;
+        gap: 10px;
+    }
+    .step-item h3 {
+        font-size: 2em;
+    }
+}

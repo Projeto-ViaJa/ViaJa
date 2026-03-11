@@ -69,3 +69,25 @@ li a{
     font-weight: 300;
     font-size: 20px;
 }
+
+@media screen and (width <= 440px) {
+    .container-home {
+        height: 60vh;
+    }
+
+    .header nav {
+        display: none;
+    }
+
+    .btn-area-header {
+        width: 60%;
+    }
+    
+    .btn-header {
+        padding: 8px 14px;
+    }
+
+    .header .logo-img {
+        width: 40%;
+    }
+}

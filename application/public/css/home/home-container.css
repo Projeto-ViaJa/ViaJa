@@ -47,8 +47,40 @@
 }
 
 
+@media screen and (width <= 440px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
+    .home-container {
+        height: 50vh;
+    }
 
+    .banner-home {
+        height: 100%;
+        padding-left: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+    .content-banner {
+        width: 100vw;
+    }
+    .content-banner h1{
+        font-size: 1.4em;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .banner-home p {
+        height: 30vh;
+        width: 75%;
+        font-size: 0.8em;
+        font-weight: 400;
+    }
 
-
+    .banner-home .btn-solicitar-orcamento {
+        margin-top: 25px;
+        width: 70vw;
+        padding: 10px;
+    }
+}
 
