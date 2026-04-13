@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViaJá - Dashboard</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/dashboard/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container-dashboard">
+        <div class="header">
+            <div class="logo-img">
+                <img src="../../assets/logo.svg" alt="ViaJá Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#relatorios">Relatórios</a></li>
+                    <li><a href="#configuracoes">Configurações</a></li>
+                </ul>
+            </nav>
+            <div class="btn-area-header">
+                <button class="btn-header logout">Sair</button>
+            </div>
+        </div>
+        <div class="dashboard-main">
+            <h1>Dashboard de Análises</h1>
+            <div class="charts">
+                <div class="chart-container">
+                    <h2>Visitantes por Mês</h2>
+                    <canvas id="chart-visitantes"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2>Receita por Destino</h2>
+                    <canvas id="chart-receita"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2>Tendências de Mercado</h2>
+                    <canvas id="chart-tendencias"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2>Investimentos Recomendados</h2>
+                    <canvas id="chart-investimentos"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../js/dashboard.js"></script>
+</body>
+</html>
