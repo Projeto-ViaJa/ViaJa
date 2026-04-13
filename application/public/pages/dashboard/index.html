@@ -1,52 +1,273 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViaJá - Dashboard</title>
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/dashboard/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="../../css/dashboard/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container-dashboard">
-        <div class="header">
-            <div class="logo-img">
-                <img src="../../assets/logo.svg" alt="ViaJá Logo">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#dashboard">Dashboard</a></li>
-                    <li><a href="#relatorios">Relatórios</a></li>
-                    <li><a href="#configuracoes">Configurações</a></li>
-                </ul>
-            </nav>
-            <div class="btn-area-header">
-                <button class="btn-header logout">Sair</button>
-            </div>
-        </div>
-        <div class="dashboard-main">
-            <h1>Dashboard de Análises</h1>
-            <div class="charts">
-                <div class="chart-container">
-                    <h2>Visitantes por Mês</h2>
-                    <canvas id="chart-visitantes"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h2>Receita por Destino</h2>
-                    <canvas id="chart-receita"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h2>Tendências de Mercado</h2>
-                    <canvas id="chart-tendencias"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h2>Investimentos Recomendados</h2>
-                    <canvas id="chart-investimentos"></canvas>
-                </div>
-            </div>
-        </div>
+
+  <aside class="menu-lateral">
+    <div class="perfil-usuario">
+      <div class="foto-perfil"></div>
+      <span>User</span>
     </div>
-    <script src="../../js/dashboard.js"></script>
+
+    <nav class="navegacao">
+      <a href="#" class="ativo">
+        <div class="icone-nav a"><span></span><span></span><span></span><span></span></div>
+        Dashboard
+      </a>
+      <a href="#">
+        <div class="icone-nav b "><span></span><span></span><span></span><span></span></div>
+        Usuários
+      </a>
+      <a href="#">
+        <div class="icone-nav c"><span></span><span></span><span></span><span></span></div>
+        Dados
+      </a>
+      <a href="#">
+        <div class="icone-nav d"><span></span><span></span><span></span><span></span></div>
+        Conta
+      </a>
+    </nav>
+
+    <div class="rodape-menu">
+      <a href="#">
+        <div class="icone-sair"></div>
+        Sair
+      </a>
+    </div>
+  </aside>
+
+  <main class="conteudo">
+    <h1 class="saudacao">Olá, <strong>User!</strong></h1>
+
+    <div class="linha-resumo">
+      <div class="card-resumo">
+        <div class="titulo-resumo">Estado mais frequentado</div>
+        <div class="valor-resumo">
+          São Paulo
+          <span class="etiqueta-filtro">▾ Mês</span>
+        </div>
+      </div>
+      <div class="card-resumo">
+        <div class="titulo-resumo">Período Sazonal</div>
+        <div class="valor-resumo">Dezembro</div>
+      </div>
+      <div class="card-resumo">
+        <div class="titulo-resumo">Total de viagens</div>
+        <div class="valor-resumo">
+          125.000
+          <span class="etiqueta-filtro">▾ Semestre</span>
+        </div>
+      </div>
+      <div class="card-resumo">
+        <div class="titulo-resumo">Dias até o próximo período sazonal</div>
+        <div class="valor-resumo">35 Dias</div>
+      </div>
+    </div>
+
+    <div class="linha-central">
+
+      <div class="card-grafico">
+        <div class="cabecalho-grafico">
+          <div>
+            <div class="etiqueta-ano">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              2026
+            </div>
+            <div class="titulo-grafico">Fluxo de pessoas<br>por estado</div>
+            <div class="descricao-grafico">Número de pessoas baseado em milhares. Cada linha representa um estado</div>
+            <div class="linha-legenda" id="legenda"></div>
+          </div>
+          <div class="botao-grafico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+        </div>
+        <div class="area-grafico">
+          <canvas id="graficoFluxo"></canvas>
+        </div>
+      </div>
+
+      <div class="card-ranking">
+        <div class="titulo-ranking">Estados mais <strong>Visitados</strong></div>
+        <table class="tabela-ranking">
+          <thead>
+            <tr>
+              <th>Posição ⇅</th>
+              <th>Estado</th>
+              <th>Qtd. de pessoas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="posicao">1°</span></td><td>São Paulo</td><td>270.000</td></tr>
+            <tr><td><span class="posicao">2°</span></td><td>Bahia</td><td>150.000</td></tr>
+            <tr><td><span class="posicao">3°</span></td><td>Minas Gerais</td><td>120.000</td></tr>
+            <tr><td><span class="posicao">1°</span></td><td>Paraíba</td><td>70.000</td></tr>
+            <tr><td><span class="posicao">2°</span></td><td>Mato Grosso</td><td>50.000</td></tr>
+            <tr><td><span class="posicao">3°</span></td><td>Sergipe</td><td>30.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="secao-busca">
+      <div class="titulo-busca">Pesquisar localidades</div>
+      <div class="barra-busca">
+        <div class="campo-busca-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input class="campo-busca" type="text" placeholder="" id="campoBusca"/>
+        </div>
+        <button class="botao botao-escuro" onclick="filtrarTabela()">Filtrar</button>
+        <button class="botao botao-claro" onclick="limparFiltro()">Limpar Filtros</button>
+      </div>
+
+      <table class="tabela-dados" id="tabelaDados">
+        <thead>
+          <tr>
+            <th>Estado ⇅</th>
+            <th>Cidade ⇅</th>
+            <th>Crescimento</th>
+            <th>Valor arrecadado ⇅</th>
+            <th>Data da pesquisa</th>
+            <th>Tipo de destino</th>
+            <th>Sazonalidade (Mês)</th>
+            <th>Avaliação média</th>
+          </tr>
+        </thead>
+        <tbody id="linhasDados">
+          <tr>
+            <td>Minas Gerais</td><td>Belo Horizonte</td>
+            <td class="crescimento-positivo">+7%</td>
+            <td>R$ 2.457.000</td><td>11/04/2026</td><td>Desenv.</td><td>1–12</td><td>3.5</td>
+          </tr>
+          <tr>
+            <td>São Paulo</td><td>Ubatuba</td>
+            <td class="crescimento-negativo">-2%</td>
+            <td>R$ 1.234.000</td><td>13/04/2026</td><td>Praia</td><td>9–12</td><td>4.3</td>
+          </tr>
+          <tr>
+            <td>Bahia</td><td>Salvador</td>
+            <td class="crescimento-positivo">+0.81%</td>
+            <td>R$ 4.127.000</td><td>11/04/2026</td><td>Carnaval</td><td>1–2</td><td>4.2</td>
+          </tr>
+          <tr>
+            <td>Sergipe</td><td>Aracaju</td>
+            <td class="crescimento-positivo">+7%</td>
+            <td>R$ 2.457.000</td><td>11/04/2026</td><td>Cultura</td><td>1–12</td><td>3.5</td>
+          </tr>
+          <tr>
+            <td>Ceará</td><td>Jericoacoara</td>
+            <td class="crescimento-negativo">-2%</td>
+            <td>R$ 1.234.000</td><td>13/04/2026</td><td>Praia</td><td>9–12</td><td>4.3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+    const estados = [
+      { label: 'BA', cor: '#4a90d9', dados: [20,25,30,28,35,40,55,70,65,60,58,62] },
+      { label: 'SP', cor: '#111111', dados: [30,32,38,35,40,45,60,80,75,70,68,72] },
+      { label: 'MG', cor: '#888888', dados: [15,18,20,22,25,28,32,40,38,35,33,36] },
+      { label: 'SC', cor: '#bbb',    dados: [10,12,14,13,16,18,22,28,26,24,22,25] },
+      { label: 'PB', cor: '#d4a853', dados: [8,9,11,10,13,15,18,22,20,18,17,19]  },
+      { label: 'CE', cor: '#a0c878', dados: [12,14,16,15,19,21,25,30,28,26,24,27] },
+    ];
+
+    const canvas = document.getElementById('graficoFluxo').getContext('2d');
+
+    new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: meses,
+        datasets: estados.map(e => ({
+          label: e.label,
+          data: e.dados,
+          borderColor: e.cor,
+          backgroundColor: e.cor + '18',
+          borderWidth: e.label === 'SP' ? 2.5 : 1.5,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          tension: 0.4,
+          fill: e.label === 'BA',
+        }))
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#111',
+            titleColor: '#fff',
+            bodyColor: '#ccc',
+            padding: 10,
+            cornerRadius: 8,
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'Inter', size: 11 }, color: '#aaa' },
+            border: { display: false },
+          },
+          y: {
+            min: 0, max: 100,
+            ticks: { stepSize: 10, font: { family: 'Inter', size: 11 }, color: '#aaa' },
+            grid: { color: '#f0f0ee', drawBorder: false },
+            border: { display: false },
+          }
+        }
+      }
+    });
+
+    const legendaEl = document.getElementById('legenda');
+    estados.forEach(e => {
+      const item = document.createElement('div');
+      item.className = 'item-legenda';
+      item.innerHTML = `<div class="bolinha-legenda" style="background:${e.cor}"></div>${e.label}`;
+      legendaEl.appendChild(item);
+    });
+
+    function filtrarTabela() {
+      const busca = document.getElementById('campoBusca').value.toLowerCase();
+      document.querySelectorAll('#linhasDados tr').forEach(linha => {
+        linha.style.display = linha.textContent.toLowerCase().includes(busca) ? '' : 'none';
+      });
+    }
+
+    function limparFiltro() {
+      document.getElementById('campoBusca').value = '';
+      document.querySelectorAll('#linhasDados tr').forEach(linha => linha.style.display = '');
+    }
+
+    document.getElementById('campoBusca').addEventListener('keyup', e => {
+      if (e.key === 'Enter') filtrarTabela();
+    });
+  </script>
 </body>
 </html>
