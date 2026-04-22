@@ -70,7 +70,9 @@ li a{
     font-size: 20px;
 }
 
-@media screen and (width <= 440px) {
+
+/* ── Mobile Pequeno (≤ 360px) ── */
+@media screen and (max-width: 360px) { 
     .container-home {
         height: 60vh;
     }
@@ -85,9 +87,104 @@ li a{
     
     .btn-header {
         padding: 8px 14px;
+        font-size: 1em;
     }
 
     .header .logo-img {
         width: 40%;
     }
-}
+ }
+
+/* ── Mobile Grande (361px – 599px) ── */
+@media screen and (min-width: 361px) and (max-width: 599px) {
+    .header {
+        height: 80px;
+    }
+    .container-home {
+        height: 60vh;
+    }
+    .home-container {
+        height: 50vh;
+    }
+    .header nav {
+        display: none;
+    }
+
+    .btn-area-header {
+        width: 60%;
+    }
+    
+    .btn-header {
+        padding: 12px 18px;
+        font-size: 1.2em;
+    }
+
+    .header .logo-img {
+        width: 40%;
+    }
+
+ }
+
+/* ── Tablet Portrait (600px – 767px) ── */
+@media screen and (min-width: 600px) and (max-width: 767px) {
+    .header {
+        height: 120px;
+    }
+    .container-home {
+        height: 60vh;
+    }
+    .home-container {
+        height: 50vh;
+    }
+    .header nav {
+        display: none;
+    }
+
+    .btn-area-header {
+        width: 60%;
+    }
+    
+    .btn-header {
+        padding: 16px 25px;
+        font-size: 1.5em;
+    }
+
+    .header .logo-img {
+        width: 40%;
+    }
+ }
+
+
+/* ── HD (1024px – 1365px) ── */
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .header {
+        height: 120px;
+        justify-content: space-around;
+    }
+    .container-home {
+        height: 80vh;
+    }
+    .home-container {
+        height: 50vh;
+    }
+
+    .header .logo-img {
+        width: 10%;
+    }
+    .header .btn-area-header {
+        width: 10%;
+    }
+    .header nav {
+        width: 40%;
+    }
+    
+    .btn-header {
+        padding: 16px 30px;
+        font-size: 1.2em;
+    }
+    .logo-img img {
+        padding: 0;
+        width: 100%;
+        padding-right: 10px;
+    }
+ }
