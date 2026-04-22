@@ -46,8 +46,48 @@
 
 }
 
+/* ── Mobile Pequeno (≤ 360px) ── */
+@media screen and (max-width: 360px) { 
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
-@media screen and (width <= 440px) {
+    .home-container {
+        height: 50vh;
+    }
+
+    .banner-home {
+        height: 100%;
+        width: 90%;
+        padding-left: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+    .content-banner {
+        width: 100vw;
+    }
+    .content-banner h1{
+        font-size: 1em;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .banner-home p {
+        height: 30vh;
+        width: 75%;
+        font-size: 0.6em;
+        font-weight: 400;
+    }
+
+    .banner-home .btn-solicitar-orcamento {
+        margin-top: 25px;
+        width: 70%;
+        font-size: 0.6em;
+        padding: 10px;
+    }
+ }
+
+ /* ── Mobile Grande (361px – 599px) ── */
+@media screen and (min-width: 361px) and (max-width: 599px) { 
     ::-webkit-scrollbar {
         display: none;
     }
@@ -74,14 +114,95 @@
     .banner-home p {
         height: 30vh;
         width: 75%;
-        font-size: 0.8em;
+        font-size: 0.7em;
         font-weight: 400;
     }
 
     .banner-home .btn-solicitar-orcamento {
         margin-top: 25px;
-        width: 70vw;
+        width: 70%;
+        font-size: 0.6em;
         padding: 10px;
     }
 }
 
+/* ── Tablet Portrait (600px – 767px) ── */
+@media screen and (min-width: 600px) and (max-width: 767px) { 
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .home-container {
+        height: 50vh;
+    }
+
+    .banner-home {
+        height: 100%;
+        width: 90%;
+        padding-left: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+    .content-banner {
+        width: 100vw;
+    }
+    .content-banner h1{
+        font-size: 1.8em;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .banner-home p {
+        height: 30vh;
+        width: 75%;
+        font-size: 1em;
+        font-weight: 400;
+    }
+
+    .banner-home .btn-solicitar-orcamento {
+        margin-top: 25px;
+        width: 70%;
+        font-size: 0.8em;
+        padding: 14px;
+    }
+}
+
+
+/* ── HD (1024px – 1365px) ── */
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .home-container {
+        height: 100vh;
+    }
+
+    .banner-home {
+        height: 100%;
+        width: 90%;
+        padding-left: 10%;
+        align-items: center;
+        justify-content: center;
+    }
+    .content-banner {
+        width: 100vw;
+    }
+    .content-banner h1{
+        font-size: 1.2em;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .banner-home p {
+        height: 30vh;
+        width: 75%;
+        font-size: 1em;
+        font-weight: 400;
+    }
+
+    .banner-home .btn-solicitar-orcamento {
+        margin-top: 20px;
+        width: 30%;
+        font-size: 0.8em;
+        padding: 14px;
+    }
+ }
