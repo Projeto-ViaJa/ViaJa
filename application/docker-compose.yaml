@@ -2,12 +2,13 @@ services:
   app:
     depends_on:
       - db
-    build: ./application
+    build: .
+    container_name: viaja-web
     ports:
       - "3333:3333"
     environment:
       DB_HOST: db
-      DB_DATABASE: viaja_db
+      DB_DATABASE: viaja_dev
       DB_USER: root
       DB_PASSWORD: 123456
       DB_PORT: 3306
@@ -19,12 +20,12 @@ services:
     container_name: viaja-mysql
     environment:
       MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: viaja_db
+      MYSQL_DATABASE: viaja_dev
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./bd/bd-dev.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ../bd/bd-dev.sql:/docker-entrypoint-initdb.d/01-init.sql
 
 volumes:
   db_data:
