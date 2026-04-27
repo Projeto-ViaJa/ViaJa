@@ -4,6 +4,7 @@ import com.github.pjfanning.xlsx.StreamingReader;
 import com.sun.tools.javac.Main;
 import dataLoader.util.RegistroVooColumns;
 import entity.RegistroVoo;
+import logger.AppLogger;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -61,12 +62,13 @@ public class ExcelRegistroVooReader {
                     registros.add(r);
 
                 } catch (Exception e) {
-                    System.out.println("Erro na linha " + row.getRowNum());
+                    AppLogger.warning("ETL", "Linha ignorada por erro de mapeamento",
+                            "Linha " + row.getRowNum() + " — " + e.getMessage());
                 }
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            AppLogger.error("ETL", "Falha crítica ao abrir o arquivo Excel", e);
         }
 
         return registros;

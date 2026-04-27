@@ -41,6 +41,7 @@ public class RegistroVooDaoJDBC implements RegistroVooDao {
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             truncateRegistroVoo();
+
             Integer batchCount = 0;
 
             for (RegistroVoo registro : registros) {

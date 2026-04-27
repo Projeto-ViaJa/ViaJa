@@ -34,12 +34,10 @@ public class Main {
                         " removido antes do download");
 
             } else {
-                System.out.println("Falha ao deletar o arquivo.");
+                AppLogger.error("s3", "Falha ao deletar o arquivo local", "Verifique permissões ou locks do SO " +
+                                "para:" + file.getName());
             }
-        } else {
-            System.out.println("Arquivo não encontrado.");
         }
-
 
         //Instanciando o cliente S3 via S3Provider
         S3Client s3Client = new S3Provider().getS3Client();
@@ -64,7 +62,7 @@ public class Main {
               nomeArquivo = object.key();
           }
         } catch (IOException | S3Exception e) {
-           System.err.println("Erro ao fazer download dos arquivos: " + e.getMessage());
+            AppLogger.error("S3", "Falha no download dos arquivos", e);
         }
 
 
