@@ -18,18 +18,21 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.List;
 
+import logger.AppLogger;
+
 public class Main {
 
     public static void main(String[] args) {
         String nomeArquivo = null;
 
-
-
         File file = new File("BASE 10 ANOS - EM XLSX.xlsx");
+
 
         if (file.exists()) {
             if (file.delete()) {
-                System.out.println("Arquivo deletado com sucesso!");
+                AppLogger.info("S3", "Arquivo local encontrado e deletado", "Arquivo: " + file.getName() +
+                        " removido antes do download");
+
             } else {
                 System.out.println("Falha ao deletar o arquivo.");
             }
@@ -38,19 +41,12 @@ public class Main {
         }
 
 
-
-
-
-
-
-
         //Instanciando o cliente S3 via S3Provider
         S3Client s3Client = new S3Provider().getS3Client();
         String bucketName = "bucketviaja2026";
 
-         //*************************************
-         //*   Fazendo download de arquivos    *
-         //*************************************
+
+         //  Fazendo download de arquivos
         try {
         ListObjectsRequest requisicao = ListObjectsRequest.builder()
         .bucket(bucketName)
@@ -72,8 +68,6 @@ public class Main {
         }
 
 
-
-
         ExcelRegistroVooReader reader = new ExcelRegistroVooReader();
         RegistroVooService service = new RegistroVooService();
 
@@ -82,7 +76,6 @@ public class Main {
                 reader.extrairRegistros(nomeArquivo)
         );
         System.out.println("\n=== TEST: Finalizado tentativa de extrair dados ===");
-
 
 
         System.out.println("\n=== TEST: Iniciando tentativa de inserir no banco ===");
