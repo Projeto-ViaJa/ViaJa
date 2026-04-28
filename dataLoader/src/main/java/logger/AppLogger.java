@@ -54,7 +54,6 @@ public class AppLogger {
                 ps.setString(2, modulo);
                 ps.setString(3, mensagem);
                 ps.setString(4, descricao);
-
                 ps.executeUpdate();
 
             }
@@ -63,6 +62,5 @@ public class AppLogger {
 
             log.error("AppLogger: Falha ao salvar log no banco", ex);
         }
-
     }
 }
