@@ -4,6 +4,7 @@ import database.config.DB;
 import database.model.dao.RegistroVooDao;
 import entity.RegistroVoo;
 import exceptions.DbException;
+import logger.AppLogger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,24 +69,37 @@ public class RegistroVooDaoJDBC implements RegistroVooDao {
                 ps.addBatch();
                 batchCount++;
 
-                if (batchCount % BATCH_SIZE == 0) ps.executeBatch();
+                if (batchCount % BATCH_SIZE == 0){
+
+                    ps.executeBatch();
+                    AppLogger.info("DATABASE", "Lote parcial executado.",
+                            batchCount + " registros enviados ao banco até o momento");
+                }
             }
 
             ps.executeBatch();
             conn.commit();
             conn.setAutoCommit(true);
-            DB.closeStatment(ps);
+
+            AppLogger.info("DATABASE","Inserção em lotes finalizada e commit realizado.",
+                    "Total de: " + registros.size() + " registros inseridos com sucesso na tabela registro_voo");
+
         } catch (SQLException e) {
+            AppLogger.error("DATABASE", "Falha durante inserção em lote, tentativa de rollback.", e);
             try {
                 conn.rollback();
                 conn.setAutoCommit(true);
+                AppLogger.warning("DATABASE","Rollbak realizado com sucesso.",
+                        "Transação revertida após falha: " + e.getMessage());
+
             } catch (SQLException ex) {
+
+                AppLogger.error("DATABASE","Falha ao executar rollback","Erro: " + ex.getMessage());
                 throw new DbException(ex.getMessage());
             }
 
             throw new DbException(e.getMessage());
         }
-
     }
 
     @Override
@@ -96,11 +110,12 @@ public class RegistroVooDaoJDBC implements RegistroVooDao {
 
         try ( PreparedStatement ps = conn.prepareStatement(sql) ){
             ps.execute();
-            DB.closeStatment(ps);
+            AppLogger.info("DATABASE", "Tabela registro_voo truncada", "TRUNCATE executado antes da inserção em batch");
+
+
         } catch (Exception e) {
+            AppLogger.error("DATABASE","Falha ao truncar a tabela registro_voo.","Erro: " + e);
             throw new RuntimeException(e);
         }
     }
-
-
 }

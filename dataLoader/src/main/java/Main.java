@@ -1,9 +1,11 @@
 import client.S3Provider;
+import database.config.DB;
 import database.model.dao.DaoFactory;
 import database.model.dao.RegistroVooDao;
 import entity.RegistroVoo;
 import dataLoader.reader.ExcelRegistroVooReader;
 import dataLoader.service.RegistroVooService;
+import exceptions.DbException;
 import org.slf4j.Logger;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -23,26 +25,25 @@ import logger.AppLogger;
 public class Main {
 
     public static void main(String[] args) {
+        AppLogger.info("INFO","INFO","INFO");
         String nomeArquivo = null;
 
         File file = new File("BASE 10 ANOS - EM XLSX.xlsx");
 
-
         if (file.exists()) {
             if (file.delete()) {
-                AppLogger.info("S3", "Arquivo local encontrado e deletado", "Arquivo: " + file.getName() +
-                        " removido antes do download");
+                AppLogger.info("S3", "Arquivo local encontrado e deletado",
+                        "Arquivo: " + file.getName() + " removido antes do download");
 
             } else {
-                AppLogger.error("s3", "Falha ao deletar o arquivo local", "Verifique permissões ou locks do SO " +
-                                "para:" + file.getName());
+                AppLogger.error("s3", "Falha ao deletar o arquivo local",
+                        "Verifique permissões ou locks do SO " + "para:" + file.getName());
             }
         }
 
         //Instanciando o cliente S3 via S3Provider
         S3Client s3Client = new S3Provider().getS3Client();
         String bucketName = "bucketviaja2026";
-
 
          //  Fazendo download de arquivos
         try {
@@ -51,6 +52,7 @@ public class Main {
                     .build();
             List<S3Object> objects = s3Client.listObjects(requisicao).contents();
             for (S3Object object : objects) {
+                AppLogger.info("S3","Iniciando download do arquivo","Nome do arquivo: " + object.key());
                 GetObjectRequest getObjectRequest = GetObjectRequest.builder()
                         .bucket(bucketName)
                         .key(object.key())
@@ -58,13 +60,12 @@ public class Main {
 
                       InputStream inputStream = s3Client.getObject(getObjectRequest, ResponseTransformer.toInputStream());
               Files.copy(inputStream, new File(object.key()).toPath());
-              System.out.println("Arquivo baixado: " + object.key());
+              AppLogger.info("S3", "Arquivo baixado com sucesso", "Objeto S3: " + object.key());
               nomeArquivo = object.key();
           }
         } catch (IOException | S3Exception e) {
             AppLogger.error("S3", "Falha no download dos arquivos", e);
         }
-
 
         ExcelRegistroVooReader reader = new ExcelRegistroVooReader();
         RegistroVooService service = new RegistroVooService();
@@ -75,11 +76,17 @@ public class Main {
         );
         System.out.println("\n=== TEST: Finalizado tentativa de extrair dados ===");
 
+        try {
+            AppLogger.info("DATABASE", "Carregando propriedades de conexão",
+                    "Lendo db.properties via FileInputStream.");
 
-        System.out.println("\n=== TEST: Iniciando tentativa de inserir no banco ===");
-        RegistroVooDao registroVooDao = DaoFactory.createRegistroVooDao();
-        registroVooDao.insert(registrosVoo);
-        System.out.println("\n=== TEST: Finalizado a tentativa de inserir no banco ===");
+            RegistroVooDao registroVooDao = DaoFactory.createRegistroVooDao();
+            AppLogger.info("DATABASE","Conexão com o banco de dados estabelecida","getConnection() bem-sucedido.");
+            registroVooDao.insert(registrosVoo);
 
+        } catch (DbException e) {
+            AppLogger.error("DATABASE","Falaha ao conectar ao banco de dados", "Erro: " + e);
+            throw new RuntimeException(e);
+        }
     }
 }

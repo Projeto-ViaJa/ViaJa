@@ -27,10 +27,15 @@ public class ExcelRegistroVooReader {
 
         List<RegistroVoo> registros = new ArrayList<>();
 
+        AppLogger.info("ETL", "Iniciando abertura do arquivo Excel.", "Arquivo: " + nomeArquivo);
+
         try (Workbook workbook = new StreamingReader.Builder()
                 .rowCacheSize(100)
                 .bufferSize(4096)
                 .open(new File(nomeArquivo))) {
+
+            AppLogger.info("ETL", "Arquivo Excel aberto - Iniciando leitura de linhas",
+                    "Workbook instanciado. Acessando aba indice 0.");
 
             Sheet sheet = workbook.getSheetAt(0);
 
@@ -64,8 +69,11 @@ public class ExcelRegistroVooReader {
                 } catch (Exception e) {
                     AppLogger.warning("ETL", "Linha ignorada por erro de mapeamento",
                             "Linha " + row.getRowNum() + " — " + e.getMessage());
+
                 }
             }
+            AppLogger.info("ETL", "Leitura de Excel concluída.",
+                    "Workbook fechado. Total de registros extraídos: " + registros.size());
 
         } catch (Exception e) {
             AppLogger.error("ETL", "Falha crítica ao abrir o arquivo Excel", e);
