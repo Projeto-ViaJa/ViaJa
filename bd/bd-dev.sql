@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS usuario (
         foreign key (fk_empresa) references empresa(id_empresa)
 );
 
+
+
 SELECT * FROM  usuario;
 
 
@@ -114,7 +116,9 @@ descricao text
 
 INSERT INTO empresa (nome_fantasia, cnpj, email_empresa, token) VALUES
 ('teste1','12345678901234','teste@email.com','123'),
-('teste2','12345678901235','teste2@email.com','456');\
+('teste2','12345678901235','teste2@email.com','456');
+INSERT INTO usuario (nome, email_usuario, senha, is_admin, fk_empresa) VALUES
+('Gabriel Fontes', 'fontes@email.com', '12345678', 1, 1);
 INSERT INTO hospedagemParceiros
  (cnpj, nomeFantasia, tipoHospedagem, nomeResponsavel, telContato, email, filialOuMatriz, uf, municipio, rua, bairro, cep)
      VALUES
