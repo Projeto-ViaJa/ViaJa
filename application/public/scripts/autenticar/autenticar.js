@@ -18,7 +18,7 @@ function entrar() {
     .then(function (resposta) {
       if (resposta.ok) {
         console.log(resposta);
-        
+
         resposta.json().then((json) => {
           console.log(json);
           console.log(JSON.stringify(json));
@@ -28,8 +28,9 @@ function entrar() {
           sessionStorage.IS_ADMIN = json.is_admin;
 
           document.querySelector(".error-message").style.display = "none";
-            
+
           alert("Login realizado com sucesso!");
+          document.location = "../../pages/dashboard/index.html";
         });
       } else {
         if (resposta.status === 403) {

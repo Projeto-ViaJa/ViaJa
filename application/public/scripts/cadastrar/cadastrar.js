@@ -22,12 +22,12 @@ function validarEmpresa() {
   fetch(`/empresa/getFk/${token}`, { cache: "no-store" })
     .then((response) => {
       if (!response.ok) {
-        Error("Token inválido ou empresa não encontrada.");
+        throw new Error("Token inválido ou empresa não encontrada.");
       }
       return response.json();
     })
     .then((resposta) => {
-      if (!resposta || resposta.length === 0) {
+      if (!resposta || !resposta.id_empresa) {
         throw new Error("Token inválido.");
       }
       empresaVar = resposta.id_empresa;
@@ -35,6 +35,9 @@ function validarEmpresa() {
     })
     .catch((err) => {
       console.error("Erro ao validar empresa: ", err);
+      alert("Erro ao validar token: " + err.message);
+      document.querySelector(".token-error-message").textContent = err.message;
+      document.querySelector(".token-error-message").style.display = "flex";
     });
 }
 
@@ -62,11 +65,14 @@ function cadastrar() {
         limparFormulario();
         alert("Cadastro realizado com sucesso!");
       } else {
-        throw "Houve um erro ao tentar realizar o cadastro!";
+        return resposta.json().then(data => {
+          throw new Error(data.erro || "Houve um erro ao tentar realizar o cadastro!");
+        });
       }
     })
-    .catch(function (resposta) {
-      console.log(`#ERRO: ${resposta}`);
+    .catch(function (erro) {
+      console.log(`#ERRO: ${erro.message}`);
+      alert(`Erro ao cadastrar: ${erro.message}`);
     });
 }
 

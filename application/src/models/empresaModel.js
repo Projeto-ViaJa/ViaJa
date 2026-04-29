@@ -6,11 +6,11 @@ function getFk(token) {
     var instrucaoSql = `
         SELECT id_empresa
         FROM empresa
-        WHERE token = ${token}
+        WHERE token = ?
     `;
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+    console.log("Executando a instrução SQL com token: " + token);
+    return database.executar(instrucaoSql, [token]);
 }
 
 module.exports = {

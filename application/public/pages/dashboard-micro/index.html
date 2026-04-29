@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>W – Dashboard Macro</title>
+  <title>W – Ipanema, RJ</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/dashboard/style.css">
+  <link rel="stylesheet" href="../../css/dashboard-micro/style.css">
 </head>
 <body>
+
   <aside class="menu-lateral">
+
     <div class="perfil-usuario">
       <div class="foto-perfil">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
@@ -21,8 +23,9 @@
       </div>
       <span class="nome-usuario">User</span>
     </div>
+
     <nav class="navegacao">
-      <a href="./index.html" class="nav-item ativo">
+      <a href="../dashboard/index.html" class="nav-item">
         <span class="icone-nav">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <rect x="3"  y="3"  width="8" height="8" rx="1"/>
@@ -36,15 +39,15 @@
       <a href="../users-management/index.html" class="nav-item">
         <span class="icone-nav">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <circle cx="9"  cy="7"  r="3.5"/>
+            <circle cx="9" cy="7" r="3.5"/>
             <path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/>
-            <circle cx="17" cy="8"  r="2.5"/>
+            <circle cx="17" cy="8" r="2.5"/>
             <path d="M15.5 20c.2-1.7 1.4-3.1 3-3.8"/>
           </svg>
         </span>
         Usuários
       </a>
-      <a href="../hotels/index.html" class="nav-item">
+      <a href="../hotels/index.html" class="nav-item ativo">
         <span class="icone-nav">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <ellipse cx="12" cy="6" rx="8" ry="3"/>
@@ -52,11 +55,11 @@
             <path d="M4 11v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5"/>
           </svg>
         </span>
-        Hotéis
+        Dados
       </a>
       <a href="../calendario/index.html" class="nav-item">
         <span class="icone-nav">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <rect x="3" y="4" width="18" height="18" rx="2"/>
             <line x1="16" y1="2" x2="16" y2="6"/>
             <line x1="8" y1="2" x2="8" y2="6"/>
@@ -78,43 +81,63 @@
         Sair
       </a>
     </div>
+
   </aside>
+
   <main class="conteudo">
-    <h1 class="saudacao">Olá, <strong>User!</strong></h1>
+    <div class="breadcrumb">
+      <a href="../dashboard/index.html" class="breadcrumb-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Dashboard
+      </a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-atual">Ipanema, RJ</span>
+    </div>
+    <h1 class="titulo-localidade">Ipanema, <strong>RJ</strong></h1>
     <div class="linha-resumo">
       <div class="card-resumo">
         <div class="titulo-resumo">
           Volume de turistas mensal
-          <span class="info-icon" title="Total de turistas no mês atual">ℹ</span>
+          <span class="info-icon" title="Total de turistas no mês">ℹ</span>
         </div>
         <div class="valor-resumo">
           123.654
           <span class="badge-crescimento positivo">+7.6%</span>
+          <span class="etiqueta-filtro">▾ Mês</span>
         </div>
       </div>
       <div class="card-resumo">
         <div class="titulo-resumo">
-          Destino #1
-          <span class="info-icon" title="Destino mais visitado">ℹ</span>
+          Pax/decolagem
+          <span class="info-icon" title="Passageiros por decolagem">ℹ</span>
         </div>
-        <div class="valor-resumo destino-principal">Salvador, BA</div>
+        <div class="valor-resumo">
+          219
+          <span class="badge-crescimento positivo">+2%</span>
+        </div>
       </div>
+
       <div class="card-resumo">
         <div class="titulo-resumo">
-          Sazonalidade geral (Índice)
-          <span class="info-icon" title="Índice de sazonalidade">ℹ</span>
+          Sazonalidade (Índice)
+          <span class="info-icon" title="Índice de sazonalidade do período">ℹ</span>
         </div>
         <div class="valor-resumo sazonalidade">
           3.8X
-          <span class="etiqueta-filtro">▾ Abril</span>
         </div>
       </div>
+
       <div class="card-resumo">
         <div class="titulo-resumo">
-          Destino #1 em crescimento
-          <span class="info-icon" title="Destino com maior crescimento">ℹ</span>
+          % Participação do total
+          <span class="info-icon" title="Participação no total geral">ℹ</span>
         </div>
-        <div class="valor-resumo destino-crescimento">Diadema, SP</div>
+        <div class="valor-resumo participacao">
+          <span class="badge-crescimento positivo inline">+3.6%</span>
+          9%
+        </div>
       </div>
     </div>
     <div class="linha-central">
@@ -122,7 +145,7 @@
         <div class="cabecalho-grafico">
           <div class="info-grafico">
             <div class="etiqueta-ano">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="4" width="18" height="18" rx="2"/>
                 <line x1="16" y1="2" x2="16" y2="6"/>
                 <line x1="8"  y1="2" x2="8"  y2="6"/>
@@ -146,6 +169,16 @@
           <canvas id="graficoFluxo"></canvas>
         </div>
       </div>
+      <div class="card-grafico card-scatter">
+        <div class="cabecalho-grafico">
+          <div class="info-grafico">
+            <div class="titulo-grafico">Rota Ipanema <span class="titulo-sep">/</span> Mês</div>
+          </div>
+        </div>
+        <div class="area-grafico">
+          <canvas id="graficoScatter"></canvas>
+        </div>
+      </div>
     </div>
     <div class="secao-busca">
       <div class="titulo-busca">Pesquisar localidades</div>
@@ -158,21 +191,23 @@
           </svg>
           <input class="campo-busca" type="text" placeholder="Buscar..." id="campoBusca"/>
         </div>
-        <button class="botao botao-claro">
+
+        <button class="botao botao-claro" onclick="">
           Ordenar
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
         </button>
-        <button class="botao botao-escuro">Filtrar</button>
-        <button class="botao botao-claro" >Limpar Filtros</button>
+        <button class="botao botao-escuro" onclick="">Filtrar</button>
+        <button class="botao botao-claro" onclick="">Limpar Filtros</button>
       </div>
+
       <table class="tabela-dados" id="tabelaDados">
         <thead>
           <tr>
             <th>Ações</th>
-            <th>Estado</th>
-            <th>Cidade</th>
+            <th>Estado </th>
+            <th>Cidade </th>
             <th>Crescimento</th>
             <th>Quantidade de pessoas</th>
             <th>Sazonalidade (Índice)</th>
@@ -181,31 +216,31 @@
         </thead>
         <tbody id="linhasDados">
           <tr>
-            <td><a href="../dashboard-micro/index.html"><button class="botao-acessar">Acessar</button></a></td>
+            <td><button class="botao-acessar">Acessar</button></td>
             <td>Minas Gerais</td><td>Belo Horizonte</td>
             <td class="crescimento-positivo">+7%</td>
             <td>127.000</td><td>1.23X</td><td>11.67%</td>
           </tr>
           <tr>
-            <td><a href="../dashboard-micro/index.html"><button class="botao-acessar">Acessar</button></a></td>
+            <td><button class="botao-acessar">Acessar</button></td>
             <td>São Paulo</td><td>Ubatuba</td>
             <td class="crescimento-negativo">-2%</td>
             <td>853.000</td><td>1.76X</td><td>5.27%</td>
           </tr>
           <tr>
-            <td><a href="../dashboard-micro/index.html"><button class="botao-acessar">Acessar</button></a></td>
+            <td><button class="botao-acessar">Acessar</button></td>
             <td>Bahia</td><td>Salvador</td>
             <td class="crescimento-positivo">+0.81%</td>
             <td>445.352</td><td>2.5X</td><td>6.7%</td>
           </tr>
           <tr>
-            <td><a href="../dashboard-micro/index.html"><button class="botao-acessar">Acessar</button></a></td>
+            <td><button class="botao-acessar">Acessar</button></td>
             <td>Sergipe</td><td>Aracaju</td>
             <td class="crescimento-positivo">+7%</td>
             <td>732.723</td><td>0.8X</td><td>13.72%</td>
           </tr>
           <tr>
-            <td><a href="../dashboard-micro/index.html"><button class="botao-acessar">Acessar</button></a></td>
+            <td><button class="botao-acessar">Acessar</button></td>
             <td>Ceará</td><td>Jericoacoara</td>
             <td class="crescimento-negativo">-2%</td>
             <td>814.026</td><td>3.0X</td><td>8.87%</td>
@@ -213,31 +248,29 @@
         </tbody>
       </table>
     </div>
+
   </main>
   <script>
     const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    const estados = [
-      { label: 'BA', cor: '#4a90d9', dados: [20,25,30,28,35,40,55,70,65,60,58,62] },
-      { label: 'SP', cor: '#111111', dados: [30,32,38,35,40,45,60,80,75,70,68,72] },
-      { label: 'MG', cor: '#888888', dados: [15,18,20,22,25,28,32,40,38,35,33,36] },
-      { label: 'SC', cor: '#bbbbbb', dados: [10,12,14,13,16,18,22,28,26,24,22,25] },
-      { label: 'PB', cor: '#d4a853', dados: [8,9,11,10,13,15,18,22,20,18,17,19]  },
-      { label: 'CE', cor: '#a0c878', dados: [12,14,16,15,19,21,25,30,28,26,24,27] },
+
+    const series = [
+      { label: 'BA', cor: '#4a90d9', dados: [18,22,26,24,30,36,48,60,56,52,50,54] },
     ];
+
     new Chart(document.getElementById('graficoFluxo').getContext('2d'), {
       type: 'line',
       data: {
         labels: meses,
-        datasets: estados.map(e => ({
-          label: e.label,
-          data: e.dados,
-          borderColor: e.cor,
-          backgroundColor: e.cor + '18',
-          borderWidth: e.label === 'SP' ? 2.5 : 1.5,
+        datasets: series.map(s => ({
+          label: s.label,
+          data: s.dados,
+          borderColor: s.cor,
+          backgroundColor: s.cor + '18',
+          borderWidth: s.label === 'SP' ? 2.5 : 1.5,
           pointRadius: 0,
           pointHoverRadius: 4,
           tension: 0.4,
-          fill: e.label === 'BA',
+          fill: s.label === 'BA',
         }))
       },
       options: {
@@ -269,18 +302,17 @@
         }
       }
     });
-
     const legendaEl = document.getElementById('legendaLinha');
-    estados.forEach(e => {
+    series.forEach(s => {
       const item = document.createElement('div');
       item.className = 'item-legenda';
-      item.innerHTML = `<div class="bolinha-legenda" style="background:${e.cor}"></div>${e.label}`;
+      item.innerHTML = `<div class="bolinha-legenda" style="background:${s.cor}"></div>${s.label}`;
       legendaEl.appendChild(item);
     });
-
+    const mesesScatter = ['Jan','Fev','Março','Abril','Maio'];
     const gerarPontos = (n, xMin, xMax, yMin, yMax) =>
       Array.from({ length: n }, () => ({
-        x: +(Math.random() * (xMax - xMin) + xMin).toFixed(1),
+        x: +(Math.random() * (xMax - xMin) + xMin).toFixed(2),
         y: +(Math.random() * (yMax - yMin) + yMin).toFixed(0),
       }));
 
@@ -290,14 +322,14 @@
         datasets: [
           {
             label: 'Rotas',
-            data: gerarPontos(35, 0, 60, 0, 1000),
+            data: gerarPontos(30, 0.5, 4.5, 50, 950),
             backgroundColor: '#111111cc',
             pointRadius: 5,
             pointHoverRadius: 7,
           },
           {
             label: 'Destaque',
-            data: gerarPontos(8, 5, 55, 100, 900),
+            data: gerarPontos(7, 0.8, 4.2, 100, 850),
             backgroundColor: '#4a90d9cc',
             pointRadius: 8,
             pointHoverRadius: 10,
@@ -319,8 +351,13 @@
         },
         scales: {
           x: {
-            min: 0, max: 60,
-            ticks: { stepSize: 15, font: { family: 'Inter', size: 11 }, color: '#aaa' },
+            min: 0, max: 5,
+            ticks: {
+              stepSize: 1,
+              font: { family: 'Inter', size: 11 },
+              color: '#aaa',
+              callback: (v) => mesesScatter[v - 1] ?? '',
+            },
             grid: { color: '#f0f0ee' },
             border: { display: false },
           },
@@ -333,6 +370,7 @@
         }
       }
     });
+
   </script>
 
 </body>

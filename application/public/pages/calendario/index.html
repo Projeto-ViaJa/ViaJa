@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P – Crud | Calendário</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/calendario/style.css">
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+</head>
+<body>
+  <aside class="menu-lateral">
+    <div class="perfil-usuario">
+      <div class="foto-perfil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+      <div>
+        <span class="nome-usuario">User</span>
+      </div>
+    </div>
+
+    <nav class="navegacao">
+      <a href="../dashboard/index.html" class="nav-item">
+        <span class="icone-nav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="3" width="8" height="8" rx="1"/>
+            <rect x="13" y="3" width="8" height="8" rx="1"/>
+            <rect x="3" y="13" width="8" height="8" rx="1"/>
+            <rect x="13" y="13" width="8" height="8" rx="1"/>
+          </svg>
+        </span>
+        Dashboard
+      </a>
+      <a href="../users-management/index.html" class="nav-item">
+        <span class="icone-nav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="9" cy="7" r="3.5"/>
+            <path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/>
+            <circle cx="17" cy="8" r="2.5"/>
+            <path d="M15.5 20c.2-1.7 1.4-3.1 3-3.8"/>
+          </svg>
+        </span>
+        Usuários
+      </a>
+      <a href="../hotels/index.html" class="nav-item">
+        <span class="icone-nav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <ellipse cx="12" cy="6" rx="8" ry="3"/>
+            <path d="M4 6v5c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/>
+            <path d="M4 11v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5"/>
+          </svg>
+        </span>
+        Hotéis
+      </a>
+      <a href="./index.html" class="nav-item ativo">
+        <span class="icone-nav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </span>
+        Calendário
+      </a>
+    </nav>
+
+    <div class="rodape-menu">
+      <a href="../login/index.html" class="nav-item sair">
+        <span class="icone-nav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </span>
+        Sair
+      </a>
+    </div>
+  </aside>
+  <main class="conteudo">
+    <div class="cabecalho-pagina">
+      <div>
+        <h1 class="titulo-pagina">Calendário de Eventos e <strong>Sazonalidade</strong></h1>
+        <p style="font-size:11.5px;color:var(--text-muted);margin-top:4px;">Selecione o(s) dia(s) e adicione um evento ou marcador</p>
+      </div>
+      <span><img src="../../assets/logo.svg" alt=""></span>
+    </div>
+    <div class="cal-controls">
+      <span class="badge-ano" id="badgeAno">2026</span>
+
+      <div class="legenda-item" id="legenda-container"></div>
+
+      <div class="nav-mes">
+        <button class="nav-mes-btn" onclick="mudarMes(-1)">&#8249;</button>
+        <span class="nome-mes" id="nomeMes">Janeiro</span>
+        <button class="nav-mes-btn" onclick="mudarMes(1)">&#8250;</button>
+      </div>
+    </div>
+    <div class="wrapper-cal">
+        <div id="calendar"></div>
+    </div>
+  </main>
+  <div class="overlay" id="overlay" onclick="fecharModal()"></div>
+  <div class="modal" id="modal">
+    <div class="modal-cabecalho">
+      <div>
+        <div class="modal-titulo" id="modalTitulo">01 de Janeiro de 2026</div>
+        <div class="modal-data-sub" id="modalSub">Nenhum marcador ativo</div>
+      </div>
+      <button class="modal-fechar" onclick="fecharModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-corpo">
+      <div>
+        <div class="secao-titulo">Marcador do Período</div>
+        <div id="marcadorExistente" style="display:none;" class="marcador-existente">
+          <div class="marcador-existente-titulo">Marcador Ativo</div>
+          <div class="marcador-info">
+            <div class="marcador-cor-circle" id="marcadorCorCircle"></div>
+            <span class="marcador-nome" id="marcadorNomeLabel"></span>
+            <div class="marcador-acoes">
+              <button class="btn-mini" onclick="editarMarcador()">Editar</button>
+              <button class="btn-mini danger" onclick="removerMarcador()">Remover</button>
+            </div>
+          </div>
+        </div>
+        <div id="marcadorForm">
+          <div class="evento-form" style="gap:12px;">
+            <label class="campo-label">Nome do Marcador
+              <input class="campo-input" type="text" id="marcadorNome" placeholder="ex: Período de Alta"/>
+            </label>
+            <label class="campo-label">Cor
+              <div class="paleta" id="paletaCores"></div>
+            </label>
+            <div style="display:flex;justify-content:flex-end;">
+              <button class="botao botao-escuro" style="font-size:11px;padding:6px 14px;" onclick="salvarMarcador()">Aplicar Marcador</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="secao-titulo">Eventos do Dia</div>
+        <div class="evento-form">
+          <div id="eventosList"></div>
+          <div class="add-evento-row">
+            <input class="campo-input" type="text" id="novoEventoNome" placeholder="Nome do evento…"/>
+            <select class="campo-input" id="novoEventoCor" style="width:90px;">
+              <option value="#6c63ff">Roxo</option>
+              <option value="#4da6ff">Azul</option>
+              <option value="#4caf82">Verde</option>
+              <option value="#f5c842">Amarelo</option>
+              <option value="#ff5e5e">Vermelho</option>
+              <option value="#ff9f43">Laranja</option>
+            </select>
+            <button class="botao botao-escuro" style="white-space:nowrap;font-size:11px;padding:7px 12px;" onclick="adicionarEvento()">+ Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-rodape">
+      <button class="botao botao-claro" onclick="fecharModal()">Fechar</button>
+      <button class="botao botao-escuro" onclick="fecharModal()">Salvar</button>
+    </div>
+  </div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  let eventos = [];
+  let marcadores = {};
+
+  const calendarEl = document.getElementById('calendar');
+
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    locale: 'pt-br',
+    height: 'auto',
+
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+
+    selectable: true,
+    editable: true,
+
+    dateClick: function(info) {
+      abrirModalCriar(info.dateStr);
+    },
+    eventClick: function(info) {
+      abrirModalEditar(info.event);
+    },
+
+    events: eventos
+  });
+
+  calendar.render();
+  function abrirModalCriar(data) {
+    const nome = prompt("Nome do evento:");
+    if (!nome) return;
+
+    const cor = prompt("Cor (hex):", "#6c63ff");
+
+    const novoEvento = {
+      id: String(Date.now()),
+      title: nome,
+      start: data,
+      color: cor
+    };
+    eventos.push(novoEvento);
+    calendar.addEvent(novoEvento);
+    salvarNoBackend(novoEvento, 'POST');
+  }
+  function abrirModalEditar(event) {
+    const novoNome = prompt("Editar nome:", event.title);
+    if (!novoNome) return;
+
+    const novaCor = prompt("Editar cor:", event.backgroundColor);
+
+    event.setProp('title', novoNome);
+    event.setProp('color', novaCor);
+  }});
+</script>
+</body>
+</html>

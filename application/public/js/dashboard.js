@@ -1,7 +1,5 @@
-// Dashboard JavaScript for Charts
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Sample data for charts
     const visitantesData = {
         labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
         datasets: [{
@@ -55,8 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
             borderWidth: 1
         }]
     };
-
-    // Create charts
     new Chart(document.getElementById('chart-visitantes'), {
         type: 'line',
         data: visitantesData,

@@ -16,7 +16,26 @@ CREATE TABLE IF NOT EXISTS usuario (
     senha varchar(10) not null,
     is_admin tinyint,
     fk_empresa int not null,
+    ativo tinyint default 1,
+    permissao varchar(20) default 'Usuário',
+    nivel int default 1,
     constraint fkEmpresaUsuario
+        foreign key (fk_empresa) references empresa(id_empresa)
+);
+
+CREATE TABLE IF NOT EXISTS hotel (
+    id_hotel int primary key auto_increment,
+    nome varchar(200) not null,
+    nome_rede varchar(200),
+    rua varchar(200),
+    cidade varchar(100),
+    estado varchar(50),
+    numero varchar(10),
+    email varchar(200) unique,
+    telefone varchar(20),
+    cep varchar(10),
+    fk_empresa int,
+    constraint fkEmpresaHotel
         foreign key (fk_empresa) references empresa(id_empresa)
 );
 
