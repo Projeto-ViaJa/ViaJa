@@ -1,5 +1,5 @@
-CREATE DATABASE viaJa;
-USE viaJa;
+CREATE DATABASE IF NOT EXISTS viaja_dev;
+USE viaja_dev;
 
 -- CRIANDO TABELA EMPRESA --
 CREATE TABLE IF NOT EXISTS empresa (
@@ -28,18 +28,9 @@ CREATE TABLE IF NOT EXISTS usuario (
 
 SELECT * FROM  usuario;
 
-SELECT e.nome AS "Nome Empresa",
-e.cnpj AS "CNPJ",
-e.emailEmpresa AS "Email Empresa",
-e.tokenEmpresa AS "Token Empresa", 
-u.nome AS "Nome Usuário", 
-u.email AS "Email Usuário",
-u.senha AS "Senha"
- FROM usuario AS u JOIN empresa AS e
-	ON u.fkEmpresa = e.idEmpresa;
     
 -- CRIANDO TABELA CALENDÁRIO -- 
-CREATE TABLE eventosRegistrados(
+CREATE TABLE IF NOT EXISTS eventosRegistrados(
 	idEventosRegistrados INT PRIMARY KEY AUTO_INCREMENT,
     dataInicial DATE, 
     horarioInicial TIME, 
@@ -50,16 +41,14 @@ CREATE TABLE eventosRegistrados(
     dataRegistro DATE, 
     horarioRegistro TIME,
     fkEmpresa INT, 
-    FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+    FOREIGN KEY (fkEmpresa) REFERENCES empresa(id_empresa)
     );
     
 SELECT * FROM eventosRegistrados;
 
-SELECT * FROM eventosRegistrados JOIN empresa
-	ON fkEmpresa = idEmpresa;
     
 -- CRIANDO TABELA BASE 10 ANOS -- 
-CREATE TABLE registro_voo (
+CREATE TABLE IF NOT EXISTS registro_voo (
 id int primary key auto_increment,
 ano int,
 mes int,
@@ -73,18 +62,17 @@ natureza varchar(200),
 grupo_voo varchar(200),
 passageiros_pagos int,
 passageiros_gratis int,
-ask long,
-rpk long,
-atk long,
-rtk long,
+ask bigint,
+rpk bigint,
+atk bigint,
+rtk bigint,
 decolagens int,
 assentos int
 );
 
-SELECT * FROM base10Anos;
 
 -- CRIANDO TABELA HOSPEDAGENS PARCEIROS --
-CREATE TABLE hospedagemParceiros (
+CREATE TABLE IF NOT EXISTS hospedagemParceiros (
     idhospedagemParceiros INT PRIMARY KEY AUTO_INCREMENT,
     cnpj VARCHAR(45),
     nomeFantasia VARCHAR(500),
@@ -100,7 +88,7 @@ CREATE TABLE hospedagemParceiros (
     cep VARCHAR(45)
 );
 
-CREATE TABLE hospedagemFavoritos (
+CREATE TABLE IF NOT EXISTS hospedagemFavoritos (
     idhospedagemFavoritos INT PRIMARY KEY AUTO_INCREMENT,
     fkHospedagem INT,
     avaliacao VARCHAR(50),
@@ -109,11 +97,11 @@ CREATE TABLE hospedagemFavoritos (
     fkUsuario INT,
     fkEmpresa INT,
     FOREIGN KEY (fkHospedagem) REFERENCES hospedagemParceiros(idhospedagemParceiros),
-    FOREIGN KEY (fkUsuario) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
+    FOREIGN KEY (fkUsuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (fkEmpresa) REFERENCES empresa(id_empresa)
 );
 
-CREATE TABLE log (
+CREATE TABLE IF NOT EXISTS log (
 id int primary key auto_increment,
 dataEHora datetime default current_timestamp,
 tipo ENUM ('INFO', 'WARNING', 'ERROR'),

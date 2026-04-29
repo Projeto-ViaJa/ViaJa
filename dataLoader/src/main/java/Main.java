@@ -42,7 +42,7 @@ public class Main {
 
         //Instanciando o cliente S3 via S3Provider
         S3Client s3Client = new S3Provider().getS3Client();
-        String bucketName = "bucketviaja2026";
+        String bucketName = "2026-viaja";
 
          //  Fazendo download de arquivos
         try {
