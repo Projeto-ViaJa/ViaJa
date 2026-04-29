@@ -25,10 +25,9 @@ import logger.AppLogger;
 public class Main {
 
     public static void main(String[] args) {
-        AppLogger.info("INFO","INFO","INFO");
         String nomeArquivo = null;
 
-        File file = new File("BASE 10 ANOS - EM XLSX.xlsx");
+        File file = new File("dados_registros_voo_10_anos.xlsx");
 
         if (file.exists()) {
             if (file.delete()) {
@@ -64,7 +63,7 @@ public class Main {
               nomeArquivo = object.key();
           }
         } catch (IOException | S3Exception e) {
-            AppLogger.error("S3", "Falha no download dos arquivos", e);
+                AppLogger.error("S3", "Falha no download dos arquivos", e);
         }
 
         ExcelRegistroVooReader reader = new ExcelRegistroVooReader();
