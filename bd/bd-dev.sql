@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS empresa (
     token varchar(45) not null unique
 );
 
+SELECT * FROM empresa;
+
 CREATE TABLE IF NOT EXISTS usuario (
     id_usuario int primary key auto_increment,
     nome varchar(200),
@@ -17,26 +19,93 @@ CREATE TABLE IF NOT EXISTS usuario (
     is_admin tinyint,
     fk_empresa int not null,
     ativo tinyint default 1,
-    permissao varchar(20) default 'Usuário',
     nivel int default 1,
     constraint fkEmpresaUsuario
         foreign key (fk_empresa) references empresa(id_empresa)
 );
 
-CREATE TABLE IF NOT EXISTS hotel (
-    id_hotel int primary key auto_increment,
-    nome varchar(200) not null,
-    nome_rede varchar(200),
-    rua varchar(200),
-    cidade varchar(100),
-    estado varchar(50),
-    numero varchar(10),
-    email varchar(200) unique,
-    telefone varchar(20),
-    cep varchar(10),
-    fk_empresa int,
-    constraint fkEmpresaHotel
-        foreign key (fk_empresa) references empresa(id_empresa)
+SELECT * FROM  usuario;
+
+
+-- CRIANDO TABELA CALENDÁRIO --
+CREATE TABLE IF NOT EXISTS eventosRegistrados(
+	idEventosRegistrados INT PRIMARY KEY AUTO_INCREMENT,
+    dataInicial DATE,
+    horarioInicial TIME,
+    dataFinal DATE,
+    horarioFinal TIME,
+    titulo VARCHAR(200),
+    descricao VARCHAR(500),
+    dataRegistro DATE,
+    horarioRegistro TIME,
+    fkEmpresa INT,
+    FOREIGN KEY (fkEmpresa) REFERENCES empresa(id_empresa)
+    );
+
+SELECT * FROM eventosRegistrados;
+
+
+-- CRIANDO TABELA BASE 10 ANOS --
+CREATE TABLE IF NOT EXISTS registro_voo (
+id int primary key auto_increment,
+ano int,
+mes int,
+origem_uf varchar(200),
+origem_regiao varchar(200),
+origem_localidade varchar(200),
+destino_uf varchar(200),
+destino_regiao varchar(200),
+destino_localidade varchar(200),
+natureza varchar(200),
+grupo_voo varchar(200),
+passageiros_pagos int,
+passageiros_gratis int,
+ask bigint,
+rpk bigint,
+atk bigint,
+rtk bigint,
+decolagens int,
+assentos int
+);
+
+
+-- CRIANDO TABELA HOSPEDAGENS PARCEIROS --
+CREATE TABLE IF NOT EXISTS hospedagemParceiros (
+    idhospedagemParceiros INT PRIMARY KEY AUTO_INCREMENT,
+    cnpj VARCHAR(45),
+    nomeFantasia VARCHAR(500),
+    tipoHospedagem VARCHAR(100),
+    nomeResponsavel VARCHAR(500),
+    telContato VARCHAR(45),
+    email VARCHAR(200),
+    filialOuMatriz VARCHAR(45),
+    uf VARCHAR(45),
+    municipio VARCHAR(45),
+    rua VARCHAR(100),
+    bairro VARCHAR(100),
+    cep VARCHAR(45)
+);
+
+CREATE TABLE IF NOT EXISTS hospedagemFavoritos (
+    idhospedagemFavoritos INT PRIMARY KEY AUTO_INCREMENT,
+    fkHospedagem INT,
+    avaliacao VARCHAR(50),
+    comentario VARCHAR(45),
+    dtEdicao VARCHAR(45),
+    fkUsuario INT,
+    fkEmpresa INT,
+    FOREIGN KEY (fkHospedagem) REFERENCES hospedagemParceiros(idhospedagemParceiros),
+    FOREIGN KEY (fkUsuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (fkEmpresa) REFERENCES empresa(id_empresa)
+);
+
+CREATE TABLE IF NOT EXISTS log (
+id int primary key auto_increment,
+dataEHora datetime default current_timestamp,
+tipo ENUM ('INFO', 'WARNING', 'ERROR'),
+modulo varchar(50),
+mensagem varchar(255),
+descricao text
 );
 
 INSERT INTO empresa (nome_fantasia, cnpj, email_empresa, token) VALUES
