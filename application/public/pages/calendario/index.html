@@ -174,10 +174,54 @@
     </div>
   </div>
 
-  <script>
+  <div class="overlay" id="overlayEvento" onclick="fecharModalEvento()"></div>
+  <div class="modal" id="modalEvento">
+    <div class="modal-cabecalho">
+      <h2 class="modal-titulo">Detalhes do Evento</h2>
+      <button class="modal-fechar" onclick="fecharModalEvento()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-corpo">
+      <label class="campo-label">Nome
+        <input class="campo-input" type="text" id="eventoNome"/>
+      </label>
+      <label class="campo-label">Descrição
+        <textarea class="campo-input" id="eventoDescricao" style="resize: vertical; min-height: 80px;"></textarea>
+      </label>
+      <label class="campo-label">Nível de Importância
+        <select class="campo-input" id="eventoNivel">
+          <option value="1">Baixa</option>
+          <option value="2">Média</option>
+          <option value="3">Alta</option>
+          <option value="4">Crítica</option>
+        </select>
+      </label>
+      <label class="campo-label">Data Inicial
+        <input class="campo-input" type="date" id="eventoDataInicial"/>
+      </label>
+      <label class="campo-label">Horário Inicial
+        <input class="campo-input" type="time" id="eventoHorarioInicial"/>
+      </label>
+      <label class="campo-label">Data Final
+        <input class="campo-input" type="date" id="eventoDataFinal"/>
+      </label>
+      <label class="campo-label">Horário Final
+        <input class="campo-input" type="time" id="eventoHorarioFinal"/>
+      </label>
+    </div>
+    <div class="modal-rodape">
+      <button class="botao botao-claro" onclick="fecharModalEvento()">Cancelar</button>
+      <button class="botao botao-escuro" onclick="salvarEvento()">Salvar</button>
+    </div>
+  </div>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
-  let eventos = [];
-  let marcadores = {};
+
+  let eventoEmEdicao = null;
 
   const calendarEl = document.getElementById('calendar');
 
@@ -196,41 +240,171 @@ document.addEventListener('DOMContentLoaded', function () {
     editable: true,
 
     dateClick: function(info) {
-      abrirModalCriar(info.dateStr);
-    },
-    eventClick: function(info) {
-      abrirModalEditar(info.event);
+      abrirModalEvento(info.dateStr, null);
     },
 
-    events: eventos
+    eventClick: function(info) {
+      abrirModalEvento(null, info.event);
+    },
+    events: {
+      url: '/calendario/listar',
+      method: 'GET'
+    },
+    events: async function(fetchInfo, successCallback, failureCallback) {
+  try {
+    const response = await fetch('/calendario/listar');
+    const dados = await response.json();
+
+    console.log('DADOS BRUTOS:', dados);
+
+    const eventosFormatados = dados.map(evt => {
+
+  let start = evt.dataInicial;
+  let end = evt.dataFinal;
+
+  if (evt.dataInicial && !evt.dataInicial.includes('T')) {
+    start = evt.dataInicial + (evt.horarioInicial ? 'T' + evt.horarioInicial : '');
+  }
+
+  if (evt.dataFinal && !evt.dataFinal.includes('T')) {
+    end = evt.dataFinal + (evt.horarioFinal ? 'T' + evt.horarioFinal : '');
+  }
+
+  return {
+    id: evt.idEventosRegistrados,
+    title: evt.titulo,
+    start: start,
+    end: end,
+    color: getNivelCor(evt.nivelImportancia),
+    extendedProps: {
+      descricao: evt.descricao,
+      nivelImportancia: evt.nivelImportancia
+    }
+  };
+});
+
+    console.log('EVENTOS FORMATADOS:', eventosFormatados);
+
+    successCallback(eventosFormatados);
+
+  } catch (error) {
+    console.error('Erro ao carregar eventos:', error);
+    failureCallback(error);
+  }
+}
+
   });
 
   calendar.render();
-  function abrirModalCriar(data) {
-    const nome = prompt("Nome do evento:");
-    if (!nome) return;
 
-    const cor = prompt("Cor (hex):", "#6c63ff");
 
-    const novoEvento = {
-      id: String(Date.now()),
-      title: nome,
-      start: data,
-      color: cor
+  window.abrirModalEvento = function(dataSelecionada = null, event = null) {
+    const modal = document.getElementById('modalEvento');
+    const overlay = document.getElementById('overlayEvento');
+
+    if (event) {
+      eventoEmEdicao = event;
+
+      document.querySelector('#modalEvento .modal-titulo').textContent = 'Editar Evento';
+      document.getElementById('eventoNome').value = event.title || '';
+      document.getElementById('eventoDescricao').value = event.extendedProps?.descricao || '';
+      document.getElementById('eventoNivel').value = event.extendedProps?.nivelImportancia || '1';
+      document.getElementById('eventoDataInicial').value = event.extendedProps?.dataInicial || '';
+      document.getElementById('eventoHorarioInicial').value = event.extendedProps?.horarioInicial || '';
+      document.getElementById('eventoDataFinal').value = event.extendedProps?.dataFinal || '';
+      document.getElementById('eventoHorarioFinal').value = event.extendedProps?.horarioFinal || '';
+
+    } else {
+      eventoEmEdicao = null;
+
+      document.querySelector('#modalEvento .modal-titulo').textContent = 'Novo Evento';
+      document.getElementById('eventoNome').value = '';
+      document.getElementById('eventoDescricao').value = '';
+      document.getElementById('eventoNivel').value = '1';
+      document.getElementById('eventoDataInicial').value = dataSelecionada || '';
+      document.getElementById('eventoHorarioInicial').value = '';
+      document.getElementById('eventoDataFinal').value = dataSelecionada || '';
+      document.getElementById('eventoHorarioFinal').value = '';
+    }
+
+    modal.classList.add('aberto');
+    overlay.classList.add('aberto');
+  };
+
+  window.fecharModalEvento = function() {
+    document.getElementById('modalEvento').classList.remove('aberto');
+    document.getElementById('overlayEvento').classList.remove('aberto');
+    eventoEmEdicao = null;
+  };
+
+
+  window.salvarEvento = async function() {
+
+    const nome = document.getElementById('eventoNome').value.trim();
+    const descricao = document.getElementById('eventoDescricao').value.trim();
+    const nivel = document.getElementById('eventoNivel').value;
+    const dataInicial = document.getElementById('eventoDataInicial').value;
+    const horarioInicial = document.getElementById('eventoHorarioInicial').value;
+    const dataFinal = document.getElementById('eventoDataFinal').value;
+    const horarioFinal = document.getElementById('eventoHorarioFinal').value;
+
+    if (!nome || !dataInicial) {
+      alert('Preencha pelo menos o nome e a data inicial.');
+      return;
+    }
+
+    const dados = {
+      titulo: nome,
+      descricao: descricao,
+      nivelImportancia: nivel,
+      dataInicial: dataInicial,
+      horarioInicial: horarioInicial || '00:00:00',
+      dataFinal: dataFinal || dataInicial,
+      horarioFinal: horarioFinal || '00:00:00',
+      fkEmpresa: sessionStorage.ID_EMPRESA || 1
     };
-    eventos.push(novoEvento);
-    calendar.addEvent(novoEvento);
-    salvarNoBackend(novoEvento, 'POST');
+
+    try {
+      if (eventoEmEdicao) {
+        await fetch('/calendario/editar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...dados,
+            idEvento: eventoEmEdicao.id
+          })
+        });
+        alert('Evento atualizado!');
+      } else {
+        await fetch('/calendario/cadastrar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        });
+        alert('Evento criado!');
+      }
+
+      fecharModalEvento();
+
+      calendar.refetchEvents();
+
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao salvar evento');
+    }
+  };
+
+  function getNivelCor(nivel) {
+    switch(parseInt(nivel)) {
+      case 1: return '#4caf82';
+      case 2: return '#f5c842';
+      case 3: return '#ff9f43';
+      case 4: return '#ff5e5e';
+      default: return '#6c63ff';
+    }
   }
-  function abrirModalEditar(event) {
-    const novoNome = prompt("Editar nome:", event.title);
-    if (!novoNome) return;
 
-    const novaCor = prompt("Editar cor:", event.backgroundColor);
-
-    event.setProp('title', novoNome);
-    event.setProp('color', novaCor);
-  }});
+});
 </script>
 </body>
 </html>

@@ -1,37 +1,45 @@
 var hotelModel = require("../models/hotelModel");
 
 function cadastrarHotel(req, res) {
-    var nome = req.body.nomeServer;
-    var nome_rede = req.body.nomeRedeServer;
-    var rua = req.body.ruaServer;
-    var cidade = req.body.cidadeServer;
-    var estado = req.body.estadoServer;
-    var numero = req.body.numeroServer;
+    var cnpj = req.body.cnpjServer;
+    var nomeFantasia = req.body.nomeFantasiaServer;
+    var tipoHospedagem = req.body.tipoHospedagemServer;
+    var nomeResponsavel = req.body.nomeResponsavelServer;
+    var telContato = req.body.telContatoServer;
     var email = req.body.emailServer;
-    var telefone = req.body.telefoneServer;
+    var filialOuMatriz = req.body.filialOuMatrizServer;
+    var uf = req.body.ufServer;
+    var municipio = req.body.municipioServer;
+    var rua = req.body.ruaServer;
+    var bairro = req.body.bairroServer;
     var cep = req.body.cepServer;
-    var fkEmpresa = req.body.fkEmpresaServer;
 
-    if (nome == undefined) {
-        res.status(400).json({ erro: "Nome está undefined!" });
-    } else if (rua == undefined) {
-        res.status(400).json({ erro: "Rua está undefined!" });
-    } else if (cidade == undefined) {
-        res.status(400).json({ erro: "Cidade está undefined!" });
-    } else if (estado == undefined) {
-        res.status(400).json({ erro: "Estado está undefined!" });
-    } else if (numero == undefined) {
-        res.status(400).json({ erro: "Número está undefined!" });
+    if (cnpj == undefined) {
+        res.status(400).json({ erro: "CNPJ está undefined!" });
+    } else if (nomeFantasia == undefined) {
+        res.status(400).json({ erro: "Nome Fantasia está undefined!" });
+    } else if (tipoHospedagem == undefined) {
+        res.status(400).json({ erro: "Tipo de Hospedagem está undefined!" });
+    } else if (nomeResponsavel == undefined) {
+        res.status(400).json({ erro: "Nome Responsável está undefined!" });
+    } else if (telContato == undefined) {
+        res.status(400).json({ erro: "Telefone de Contato está undefined!" });
     } else if (email == undefined) {
         res.status(400).json({ erro: "Email está undefined!" });
-    } else if (telefone == undefined) {
-        res.status(400).json({ erro: "Telefone está undefined!" });
+    } else if (filialOuMatriz == undefined) {
+        res.status(400).json({ erro: "Filial ou Matriz está undefined!" });
+    } else if (uf == undefined) {
+        res.status(400).json({ erro: "UF está undefined!" });
+    } else if (municipio == undefined) {
+        res.status(400).json({ erro: "Município está undefined!" });
+    } else if (rua == undefined) {
+        res.status(400).json({ erro: "Rua está undefined!" });
+    } else if (bairro == undefined) {
+        res.status(400).json({ erro: "Bairro está undefined!" });
     } else if (cep == undefined) {
         res.status(400).json({ erro: "CEP está undefined!" });
-    } else if (fkEmpresa == undefined) {
-        res.status(400).json({ erro: "Empresa está undefined!" });
     } else {
-        hotelModel.cadastrar(nome, nome_rede, rua, cidade, estado, numero, email, telefone, cep, fkEmpresa)
+        hotelModel.cadastrar(cnpj, nomeFantasia, tipoHospedagem, nomeResponsavel, telContato, email, filialOuMatriz, uf, municipio, rua, bairro, cep)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -40,7 +48,7 @@ function cadastrarHotel(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao cadastrar o hotel! Erro: ",
+                        "\nHouve um erro ao cadastrar a hospedagem! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -49,41 +57,50 @@ function cadastrarHotel(req, res) {
     }
 }
 
+
 function editarHotel(req, res) {
     var id = req.body.idServer;
-    var nome = req.body.nomeServer;
-    var nome_rede = req.body.nomeRedeServer;
-    var rua = req.body.ruaServer;
-    var cidade = req.body.cidadeServer;
-    var estado = req.body.estadoServer;
-    var numero = req.body.numeroServer;
+    var cnpj = req.body.cnpjServer;
+    var nomeFantasia = req.body.nomeFantasiaServer;
+    var tipoHospedagem = req.body.tipoHospedagemServer;
+    var nomeResponsavel = req.body.nomeResponsavelServer;
+    var telContato = req.body.telContatoServer;
     var email = req.body.emailServer;
-    var telefone = req.body.telefoneServer;
+    var filialOuMatriz = req.body.filialOuMatrizServer;
+    var uf = req.body.ufServer;
+    var municipio = req.body.municipioServer;
+    var rua = req.body.ruaServer;
+    var bairro = req.body.bairroServer;
     var cep = req.body.cepServer;
-    var fkEmpresa = req.body.fkEmpresaServer;
 
     if (id == undefined) {
         res.status(400).json({ erro: "ID está undefined!" });
-    } else if (nome == undefined) {
-        res.status(400).json({ erro: "Nome está undefined!" });
-    } else if (rua == undefined) {
-        res.status(400).json({ erro: "Rua está undefined!" });
-    } else if (cidade == undefined) {
-        res.status(400).json({ erro: "Cidade está undefined!" });
-    } else if (estado == undefined) {
-        res.status(400).json({ erro: "Estado está undefined!" });
-    } else if (numero == undefined) {
-        res.status(400).json({ erro: "Número está undefined!" });
+    } else if (cnpj == undefined) {
+        res.status(400).json({ erro: "CNPJ está undefined!" });
+    } else if (nomeFantasia == undefined) {
+        res.status(400).json({ erro: "Nome Fantasia está undefined!" });
+    } else if (tipoHospedagem == undefined) {
+        res.status(400).json({ erro: "Tipo de Hospedagem está undefined!" });
+    } else if (nomeResponsavel == undefined) {
+        res.status(400).json({ erro: "Nome Responsável está undefined!" });
+    } else if (telContato == undefined) {
+        res.status(400).json({ erro: "Telefone de Contato está undefined!" });
     } else if (email == undefined) {
         res.status(400).json({ erro: "Email está undefined!" });
-    } else if (telefone == undefined) {
-        res.status(400).json({ erro: "Telefone está undefined!" });
+    } else if (filialOuMatriz == undefined) {
+        res.status(400).json({ erro: "Filial ou Matriz está undefined!" });
+    } else if (uf == undefined) {
+        res.status(400).json({ erro: "UF está undefined!" });
+    } else if (municipio == undefined) {
+        res.status(400).json({ erro: "Município está undefined!" });
+    } else if (rua == undefined) {
+        res.status(400).json({ erro: "Rua está undefined!" });
+    } else if (bairro == undefined) {
+        res.status(400).json({ erro: "Bairro está undefined!" });
     } else if (cep == undefined) {
         res.status(400).json({ erro: "CEP está undefined!" });
-    } else if (fkEmpresa == undefined) {
-        res.status(400).json({ erro: "Empresa está undefined!" });
     } else {
-        hotelModel.editar(id, nome, nome_rede, rua, cidade, estado, numero, email, telefone, cep, fkEmpresa)
+        hotelModel.editar(id, cnpj, nomeFantasia, tipoHospedagem, nomeResponsavel, telContato, email, filialOuMatriz, uf, municipio, rua, bairro, cep)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -92,7 +109,7 @@ function editarHotel(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao editar o hotel! Erro: ",
+                        "\nHouve um erro ao editar a hospedagem! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);

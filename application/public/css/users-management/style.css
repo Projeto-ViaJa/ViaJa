@@ -1,6 +1,4 @@
-/* ═══════════════════════════════════════════════════
-   VARIÁVEIS & RESET
-══════════════════════════════════════════════════ */
+
 :root {
   --cor-fundo:        #111111;
   --cor-menu:         #3700FF;
@@ -28,9 +26,6 @@ body {
   overflow: hidden;
 }
 
-/* ═══════════════════════════════════════════════════
-   SIDEBAR
-══════════════════════════════════════════════════ */
 .menu-lateral {
   width: 200px;
   min-width: 160px;
@@ -135,9 +130,7 @@ body {
   background: rgba(255,255,255,0.06);
 }
 
-/* ═══════════════════════════════════════════════════
-   CONTEÚDO PRINCIPAL
-══════════════════════════════════════════════════ */
+
 .conteudo {
   flex: 1;
   background: var(--cor-branco);
@@ -152,7 +145,6 @@ body {
 .conteudo::-webkit-scrollbar-track { background: transparent; }
 .conteudo::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
 
-/* ── Cabeçalho da página ──────────────────────── */
 .cabecalho-pagina {
   display: flex;
   align-items: flex-start;
@@ -169,7 +161,6 @@ body {
 
 .titulo-pagina strong { font-weight: 800; }
 
-/* Logo "ViaJá" canto superior direito */
 .logo-marca {
   font-size: 22px;
   font-weight: 300;
@@ -181,7 +172,6 @@ body {
 
 .logo-marca strong { font-weight: 800; }
 
-/* ── Busca ────────────────────────────────────── */
 .secao-busca { display: flex; flex-direction: column; gap: 10px; }
 
 .titulo-busca {
@@ -252,9 +242,6 @@ body {
 }
 .botao-claro:hover { background: var(--cor-fundo-claro); }
 
-/* ═══════════════════════════════════════════════════
-   TABELA DE USUÁRIOS
-══════════════════════════════════════════════════ */
 .wrapper-tabela {
   flex: 1;
   overflow-y: auto;
@@ -290,7 +277,6 @@ body {
   user-select: none;
 }
 
-.tabela-dados thead th.th-acoes { text-align: right; }
 
 .tabela-dados tbody td {
   padding: 12px 16px;
@@ -303,7 +289,6 @@ body {
 
 .tabela-dados tbody tr:hover td { background: var(--cor-fundo-claro); }
 
-/* Linha desativada */
 .linha-desativada td {
   opacity: 0.45;
 }
@@ -311,7 +296,6 @@ body {
   background: #fafaf8;
 }
 
-/* ── Badge de status ──────────────────────────── */
 .badge-status {
   display: inline-block;
   font-size: 11.5px;
@@ -328,12 +312,6 @@ body {
 .badge-status.inativo {
   color: var(--cor-texto-suave);
   background: var(--cor-fundo-claro);
-}
-
-/* ── Célula e botões de ação ──────────────────── */
-.td-acoes {
-  text-align: right;
-  white-space: nowrap;
 }
 
 .botao-acao {
@@ -367,9 +345,7 @@ body {
 }
 .botao-acao.reativar:hover { filter: brightness(1.1); }
 
-/* ═══════════════════════════════════════════════════
-   MODAL DE EDIÇÃO
-══════════════════════════════════════════════════ */
+
 .overlay {
   display: none;
   position: fixed;

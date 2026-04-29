@@ -93,33 +93,45 @@
     </div>
     <div class="secao-formulario">
       <div class="grade-campos">
-        <label class="campo-label">Nome do hotel
-          <input class="campo-input" type="text" id="fNome" placeholder=""/>
+        <label class="campo-label">CNPJ
+          <input class="campo-input" type="text" id="fCnpj" placeholder=""/>
         </label>
-        <label class="campo-label">Cidade
-          <input class="campo-input" type="text" id="fCidade" placeholder=""/>
+        <label class="campo-label">Nome Fantasia
+          <input class="campo-input" type="text" id="fNomeFantasia" placeholder=""/>
         </label>
-        <label class="campo-label">Número
-          <input class="campo-input" type="text" id="fNumero" placeholder=""/>
+        <label class="campo-label">Tipo de Hospedagem
+          <input class="campo-input" type="text" id="fTipoHospedagem" placeholder=""/>
         </label>
       </div>
       <div class="grade-campos-2">
+        <label class="campo-label">Nome Responsável
+          <input class="campo-input" type="text" id="fNomeResponsavel" placeholder=""/>
+        </label>
+        <label class="campo-label">Telefone de Contato
+          <input class="campo-input" type="text" id="fTelContato" placeholder=""/>
+        </label>
         <label class="campo-label">Email
           <input class="campo-input" type="email" id="fEmail" placeholder=""/>
+        </label>
+        <label class="campo-label">Filial ou Matriz
+          <input class="campo-input" type="text" id="fFilialOuMatriz" placeholder=""/>
+        </label>
+      </div>
+      <div class="grade-campos-3">
+        <label class="campo-label">UF
+          <input class="campo-input" type="text" id="fUf" placeholder=""/>
+        </label>
+        <label class="campo-label">Município
+          <input class="campo-input" type="text" id="fMunicipio" placeholder=""/>
         </label>
         <label class="campo-label">Rua
           <input class="campo-input" type="text" id="fRua" placeholder=""/>
         </label>
-        <label class="campo-label">Estado
-          <input class="campo-input" type="text" id="fEstado" placeholder=""/>
+        <label class="campo-label">Bairro
+          <input class="campo-input" type="text" id="fBairro" placeholder=""/>
         </label>
         <label class="campo-label">CEP
           <input class="campo-input" type="text" id="fCep" placeholder=""/>
-        </label>
-      </div>
-      <div class="grade-campos-3">
-        <label class="campo-label">Telefone
-          <input class="campo-input" type="text" id="fTelefone" placeholder=""/>
         </label>
         <div class="grupo-botoes-form">
           <button class="botao botao-escuro" onclick="adicionarOuSalvar()">Adicionar</button>
@@ -140,9 +152,9 @@
         </div>
         <select class="select-ordenar" id="selectOrdenar">
           <option value="">Ordenar</option>
-          <option value="nome">Nome</option>
-          <option value="cidade">Cidade</option>
-          <option value="rede">Rede</option>
+          <option value="nome">Nome Fantasia</option>
+          <option value="municipio">Município</option>
+          <option value="tipo">Tipo</option>
         </select>
         <button class="botao botao-escuro" onclick="filtrarTabela()">Filtrar</button>
         <button class="botao botao-claro"  onclick="limparFiltro()">Limpar Filtros</button>
@@ -152,13 +164,13 @@
       <table class="tabela-dados">
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Rede</th>
+            <th>Nome Fantasia</th>
+            <th>CNPJ</th>
             <th>Email</th>
             <th>Telefone</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>Endereço</th>
+            <th>Município</th>
+            <th>UF</th>
+            <th>Tipo</th>
             <th class="th-acoes">Ações</th>
           </tr>
         </thead>
@@ -172,7 +184,7 @@
   <div class="overlay" id="overlay" onclick="fecharModal()"></div>
   <div class="modal" id="modal">
     <div class="modal-cabecalho">
-      <h2 class="modal-titulo">Editar Hotel</h2>
+      <h2 class="modal-titulo">Editar Hospedagem</h2>
       <button class="modal-fechar" onclick="fecharModal()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -182,34 +194,43 @@
     </div>
     <div class="modal-corpo">
       <div class="modal-grade">
-        <label class="campo-label">Nome do hotel
-          <input class="campo-input" type="text" id="editNome"/>
+        <label class="campo-label">CNPJ
+          <input class="campo-input" type="text" id="editCnpj"/>
         </label>
-        <label class="campo-label">Rede
-          <input class="campo-input" type="text" id="editRede"/>
+        <label class="campo-label">Nome Fantasia
+          <input class="campo-input" type="text" id="editNomeFantasia"/>
+        </label>
+        <label class="campo-label">Tipo de Hospedagem
+          <input class="campo-input" type="text" id="editTipoHospedagem"/>
+        </label>
+        <label class="campo-label">Nome Responsável
+          <input class="campo-input" type="text" id="editNomeResponsavel"/>
+        </label>
+        <label class="campo-label">Telefone de Contato
+          <input class="campo-input" type="text" id="editTelContato"/>
         </label>
         <label class="campo-label">Email
           <input class="campo-input" type="email" id="editEmail"/>
         </label>
-        <label class="campo-label">Telefone
-          <input class="campo-input" type="text" id="editTelefone"/>
+        <label class="campo-label">Filial ou Matriz
+          <input class="campo-input" type="text" id="editFilialOuMatriz"/>
         </label>
-        <label class="campo-label">Cidade
-          <input class="campo-input" type="text" id="editCidade"/>
+        <label class="campo-label">UF
+          <input class="campo-input" type="text" id="editUf"/>
         </label>
-        <label class="campo-label">Estado
-          <input class="campo-input" type="text" id="editEstado"/>
+        <label class="campo-label">Município
+          <input class="campo-input" type="text" id="editMunicipio"/>
         </label>
         <label class="campo-label">Rua
           <input class="campo-input" type="text" id="editRua"/>
         </label>
-        <label class="campo-label">Número
-          <input class="campo-input" type="text" id="editNumero"/>
+        <label class="campo-label">Bairro
+          <input class="campo-input" type="text" id="editBairro"/>
+        </label>
+        <label class="campo-label">CEP
+          <input class="campo-input" type="text" id="editCep"/>
         </label>
       </div>
-      <label class="campo-label">CEP
-        <input class="campo-input" type="text" id="editCep"/>
-      </label>
     </div>
     <div class="modal-rodape">
       <button class="botao botao-claro"  onclick="fecharModal()">Cancelar</button>
@@ -244,24 +265,26 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            nomeServer: dados.nome,
-            nomeRedeServer: dados.rede || '',
-            ruaServer: dados.rua,
-            cidadeServer: dados.cidade,
-            estadoServer: dados.estado,
-            numeroServer: dados.numero,
+            cnpjServer: dados.cnpj,
+            nomeFantasiaServer: dados.nomeFantasia,
+            tipoHospedagemServer: dados.tipoHospedagem,
+            nomeResponsavelServer: dados.nomeResponsavel,
+            telContatoServer: dados.telContato,
             emailServer: dados.email,
-            telefoneServer: dados.telefone,
-            cepServer: dados.cep,
-            fkEmpresaServer: 1
+            filialOuMatrizServer: dados.filialOuMatriz,
+            ufServer: dados.uf,
+            municipioServer: dados.municipio,
+            ruaServer: dados.rua,
+            bairroServer: dados.bairro,
+            cepServer: dados.cep
           })
         });
         if (!response.ok) throw new Error('Erro ao cadastrar');
         await fetchHoteis();
-        mostrarToast('Hotel cadastrado com sucesso!');
+        mostrarToast('Hospedagem cadastrada com sucesso!');
       } catch (error) {
         console.error(error);
-        mostrarToast('Erro ao cadastrar hotel.');
+        mostrarToast('Erro ao cadastrar hospedagem.');
       }
     }
 
@@ -272,24 +295,26 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             idServer: id,
-            nomeServer: dados.nome,
-            nomeRedeServer: dados.rede || '',
-            ruaServer: dados.rua,
-            cidadeServer: dados.cidade,
-            estadoServer: dados.estado,
-            numeroServer: dados.numero,
+            cnpjServer: dados.cnpj,
+            nomeFantasiaServer: dados.nomeFantasia,
+            tipoHospedagemServer: dados.tipoHospedagem,
+            nomeResponsavelServer: dados.nomeResponsavel,
+            telContatoServer: dados.telContato,
             emailServer: dados.email,
-            telefoneServer: dados.telefone,
-            cepServer: dados.cep,
-            fkEmpresaServer: 1
+            filialOuMatrizServer: dados.filialOuMatriz,
+            ufServer: dados.uf,
+            municipioServer: dados.municipio,
+            ruaServer: dados.rua,
+            bairroServer: dados.bairro,
+            cepServer: dados.cep
           })
         });
         if (!response.ok) throw new Error('Erro ao editar');
         await fetchHoteis();
-        mostrarToast('Hotel editado com sucesso!');
+        mostrarToast('Hospedagem editada com sucesso!');
       } catch (error) {
         console.error(error);
-        mostrarToast('Erro ao editar hotel.');
+        mostrarToast('Erro ao editar hospedagem.');
       }
     }
 
@@ -310,26 +335,27 @@
       tbody.innerHTML = '';
 
       if (lista.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--cor-texto-fraco);padding:32px">Nenhum hotel encontrado.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--cor-texto-fraco);padding:32px">Nenhuma hospedagem encontrada.</td></tr>`;
         return;
       }
 
       lista.forEach(h => {
         const tr = document.createElement('tr');
-        if (selecionadoId === h.id_hotel) tr.classList.add('linha-selecionada');
+        if (selecionadoId === h.idhospedagemParceiros) tr.classList.add('linha-selecionada');
         tr.style.cursor = 'pointer';
-        tr.addEventListener('click', () => selecionarLinha(h.id_hotel, tr));
+        tr.addEventListener('click', () => selecionarLinha(h.idhospedagemParceiros, tr));
 
         tr.innerHTML = `
-          <td>${h.nome}</td>
-          <td>${h.nome_rede || ''}</td>
+          <td>${h.nomeFantasia}</td>
+          <td>${h.cnpj || ''}</td>
           <td>${h.email}</td>
-          <td>${h.telefone}</td>
-          <td>${h.cidade}</td>
-          <td>${h.rua}</td>
+          <td>${h.telContato}</td>
+          <td>${h.municipio}</td>
+          <td>${h.uf}</td>
+          <td>${h.tipoHospedagem || ''}</td>
           <td class="td-acoes">
-            <button class="botao-acao editar"  onclick="event.stopPropagation(); abrirModal(${h.id_hotel})">Editar</button>
-            <button class="botao-acao remover" onclick="event.stopPropagation(); excluirHotel(${h.id_hotel})">Remover</button>
+            <button class="botao-acao editar"  onclick="event.stopPropagation(); abrirModal(${h.idhospedagemParceiros})">Editar</button>
+            <button class="botao-acao remover" onclick="event.stopPropagation(); excluirHotel(${h.idhospedagemParceiros})">Remover</button>
           </td>`;
         tbody.appendChild(tr);
       });
@@ -352,8 +378,12 @@
         Object.values(h).some(v => String(v).toLowerCase().includes(busca))
       );
 
-      if (ordenar) {
-        listaFiltrada.sort((a, b) => String(a[ordenar]).localeCompare(String(b[ordenar])));
+      if (ordenar === 'nome') {
+        listaFiltrada.sort((a, b) => String(a.nomeFantasia).localeCompare(String(b.nomeFantasia)));
+      } else if (ordenar === 'municipio') {
+        listaFiltrada.sort((a, b) => String(a.municipio).localeCompare(String(b.municipio)));
+      } else if (ordenar === 'tipo') {
+        listaFiltrada.sort((a, b) => String(a.tipoHospedagem).localeCompare(String(b.tipoHospedagem)));
       }
 
       renderizar(listaFiltrada);
@@ -372,27 +402,30 @@
 
     function lerFormulario() {
       return {
-        nome:     document.getElementById('fNome').value.trim(),
-        rede:     '',
-        cidade:   document.getElementById('fCidade').value.trim(),
-        numero:   document.getElementById('fNumero').value.trim(),
-        rua:      document.getElementById('fRua').value.trim(),
-        estado:   document.getElementById('fEstado').value.trim(),
-        cep:      document.getElementById('fCep').value.trim(),
-        telefone: document.getElementById('fTelefone').value.trim(),
-        email:    document.getElementById('fEmail').value.trim(),
+        cnpj:           document.getElementById('fCnpj').value.trim(),
+        nomeFantasia:   document.getElementById('fNomeFantasia').value.trim(),
+        tipoHospedagem: document.getElementById('fTipoHospedagem').value.trim(),
+        nomeResponsavel: document.getElementById('fNomeResponsavel').value.trim(),
+        telContato:     document.getElementById('fTelContato').value.trim(),
+        email:          document.getElementById('fEmail').value.trim(),
+        filialOuMatriz: document.getElementById('fFilialOuMatriz').value.trim(),
+        uf:             document.getElementById('fUf').value.trim(),
+        municipio:      document.getElementById('fMunicipio').value.trim(),
+        rua:            document.getElementById('fRua').value.trim(),
+        bairro:         document.getElementById('fBairro').value.trim(),
+        cep:            document.getElementById('fCep').value.trim()
       };
     }
 
     function limparFormulario() {
-      ['fNome','fEmail','fCidade','fNumero','fRua','fEstado','fCep','fTelefone'].forEach(id => {
+      ['fCnpj','fNomeFantasia','fTipoHospedagem','fNomeResponsavel','fTelContato','fEmail','fFilialOuMatriz','fUf','fMunicipio','fRua','fBairro','fCep'].forEach(id => {
         document.getElementById(id).value = '';
       });
     }
 
     function adicionarOuSalvar() {
       const dados = lerFormulario();
-      if (!dados.nome || !dados.email || !dados.cidade || !dados.rua || !dados.estado || !dados.numero || !dados.cep || !dados.telefone) {
+      if (!dados.cnpj || !dados.nomeFantasia || !dados.tipoHospedagem || !dados.nomeResponsavel || !dados.telContato || !dados.email || !dados.filialOuMatriz || !dados.uf || !dados.municipio || !dados.rua || !dados.bairro || !dados.cep) {
         mostrarToast('Preencha todos os campos obrigatórios.');
         return;
       }
@@ -410,18 +443,21 @@
     }
 
     function abrirModal(id) {
-      const h = hoteis.find(x => x.id_hotel === id);
+      const h = hoteis.find(x => x.idhospedagemParceiros === id);
       if (!h) return;
       editandoId = id;
-      document.getElementById('editNome').value     = h.nome;
-      document.getElementById('editRede').value     = h.nome_rede || '';
-      document.getElementById('editEmail').value    = h.email;
-      document.getElementById('editTelefone').value = h.telefone;
-      document.getElementById('editCidade').value   = h.cidade;
-      document.getElementById('editEstado').value   = h.estado;
-      document.getElementById('editRua').value      = h.rua;
-      document.getElementById('editNumero').value   = h.numero;
-      document.getElementById('editCep').value      = h.cep;
+      document.getElementById('editCnpj').value          = h.cnpj || '';
+      document.getElementById('editNomeFantasia').value   = h.nomeFantasia || '';
+      document.getElementById('editTipoHospedagem').value = h.tipoHospedagem || '';
+      document.getElementById('editNomeResponsavel').value = h.nomeResponsavel || '';
+      document.getElementById('editTelContato').value     = h.telContato || '';
+      document.getElementById('editEmail').value         = h.email || '';
+      document.getElementById('editFilialOuMatriz').value = h.filialOuMatriz || '';
+      document.getElementById('editUf').value            = h.uf || '';
+      document.getElementById('editMunicipio').value     = h.municipio || '';
+      document.getElementById('editRua').value           = h.rua || '';
+      document.getElementById('editBairro').value        = h.bairro || '';
+      document.getElementById('editCep').value           = h.cep || '';
       document.getElementById('modal').classList.add('aberto');
       document.getElementById('overlay').classList.add('aberto');
     }
@@ -434,17 +470,20 @@
 
     function salvarEdicao() {
       const dados = {
-        nome:     document.getElementById('editNome').value.trim(),
-        rede:     document.getElementById('editRede').value.trim(),
-        email:    document.getElementById('editEmail').value.trim(),
-        telefone: document.getElementById('editTelefone').value.trim(),
-        cidade:   document.getElementById('editCidade').value.trim(),
-        estado:   document.getElementById('editEstado').value.trim(),
-        rua:      document.getElementById('editRua').value.trim(),
-        numero:   document.getElementById('editNumero').value.trim(),
-        cep:      document.getElementById('editCep').value.trim(),
+        cnpj:           document.getElementById('editCnpj').value.trim(),
+        nomeFantasia:   document.getElementById('editNomeFantasia').value.trim(),
+        tipoHospedagem: document.getElementById('editTipoHospedagem').value.trim(),
+        nomeResponsavel: document.getElementById('editNomeResponsavel').value.trim(),
+        telContato:     document.getElementById('editTelContato').value.trim(),
+        email:          document.getElementById('editEmail').value.trim(),
+        filialOuMatriz: document.getElementById('editFilialOuMatriz').value.trim(),
+        uf:             document.getElementById('editUf').value.trim(),
+        municipio:      document.getElementById('editMunicipio').value.trim(),
+        rua:            document.getElementById('editRua').value.trim(),
+        bairro:         document.getElementById('editBairro').value.trim(),
+        cep:            document.getElementById('editCep').value.trim()
       };
-      if (!dados.nome || !dados.email || !dados.cidade || !dados.rua || !dados.estado || !dados.numero || !dados.cep || !dados.telefone) {
+      if (!dados.cnpj || !dados.nomeFantasia || !dados.tipoHospedagem || !dados.nomeResponsavel || !dados.telContato || !dados.email || !dados.filialOuMatriz || !dados.uf || !dados.municipio || !dados.rua || !dados.bairro || !dados.cep) {
         mostrarToast('Preencha todos os campos obrigatórios.');
         return;
       }

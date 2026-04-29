@@ -18,6 +18,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var empresaRouter = require("./src/routes/empresa");
 var dashboardRouter = require("./src/routes/dashboard");
 var hotelRouter = require("./src/routes/hoteis");
+var calendarioRouter = require("./src/routes/calendario");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +31,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/empresa", empresaRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/hoteis", hotelRouter);
+app.use("/calendario", calendarioRouter);
 
 
 app.listen(PORTA_APP, function () {
