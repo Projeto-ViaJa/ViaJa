@@ -2,7 +2,7 @@ var database = require("../database/config")
 
 function autenticar(email, senha) {
     var instrucaoSql = `
-        SELECT id_usuario, nome, email_usuario, fk_empresa, is_admin as empresaId, ativo, permissao, nivel FROM usuario WHERE email_usuario = ? AND senha = ?;
+        SELECT id_usuario, nome, email_usuario, fk_empresa, is_admin as empresaId, ativo, nivel FROM usuario WHERE email_usuario = ? AND senha = ?;
     `;
 
     return database.executar(instrucaoSql, [email, senha]);
@@ -10,7 +10,7 @@ function autenticar(email, senha) {
 
 function cadastrar(nome, email, senha, fkEmpresa) {
     var instrucaoSql = `
-        INSERT INTO usuario (nome, email_usuario, senha, fk_empresa, is_admin, ativo, permissao, nivel) VALUES (?, ?, ?, ?, 0, 1, 'Usuário', 1);
+        INSERT INTO usuario (nome, email_usuario, senha, fk_empresa, is_admin, ativo, nivel) VALUES (?, ?, ?, ?, 0, 1, 1);
     `;
 
     return database.executar(instrucaoSql, [nome, email, senha, fkEmpresa]);
@@ -36,7 +36,7 @@ function excluir(id) {
 }
 
 function listar() {
-    var instrucaoSql = `SELECT u.id_usuario, u.nome, u.email_usuario, u.fk_empresa, e.nome_fantasia as empresa, u.ativo, u.permissao, u.nivel FROM usuario u JOIN empresa e ON u.fk_empresa = e.id_empresa`;
+    var instrucaoSql = `SELECT u.id_usuario, u.nome, u.email_usuario, u.fk_empresa, e.nome_fantasia as empresa, u.ativo, u.nivel FROM usuario u JOIN empresa e ON u.fk_empresa = e.id_empresa`;
     return database.executar(instrucaoSql);
 }
 

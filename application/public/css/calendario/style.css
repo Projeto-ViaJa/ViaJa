@@ -7,6 +7,7 @@
     }
 
     :root {
+ --cor-fundo:        #111111;
   --cor-menu:         #3700FF;
   --cor-menu-hover:   #190075;
   --cor-branco:       #ffffff;
@@ -17,8 +18,8 @@
   --cor-texto-fraco:  #aaaaaa;
   --cor-positivo:     #2ecc71;
   --cor-negativo:     #e74c3c;
+  --cor-desativar:    #8b0000;
   --cor-azul:         #4a90d9;
-  --cor-sazonalidade: #22c55e;
     }
 
     body {
@@ -152,9 +153,11 @@
     }
 
     .titulo-pagina {
-        font-size: 22px;
-        font-weight: 400;
-        color: var(--text);
+        font-size: 36px;
+        font-weight: 300;
+        color: var(--cor-texto);
+        margin-bottom: 28px;
+        letter-spacing: -1.2px;
     }
 
     .titulo-pagina strong {
@@ -194,7 +197,7 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        font-size: 11px;
+        font-size: 17px;
         color: var(--text-muted);
         cursor: pointer;
         user-select: none;
@@ -536,7 +539,7 @@
 
     .campo-input {
         background: var(--surface2);
-        border: 1px solid var(--border);
+        border: 1px solid var(--cor-borda);
         border-radius: 6px;
         color: var(--text);
         padding: 8px 10px;
@@ -659,8 +662,8 @@
     }
 
     .botao-escuro {
-        background: var(--accent);
-        color: #fff;
+        background: var(--cor-fundo);
+        color: #ffffff;
     }
 
     .botao-escuro:hover {
@@ -669,8 +672,8 @@
 
     .botao-claro {
         background: transparent;
-        color: var(--cor-borda);
-        border: 1px solid var(--border);
+        color: var(--cor-fundo);
+        border: 1px solid var(--cor-borda);
     }
 
     .botao-claro:hover {
